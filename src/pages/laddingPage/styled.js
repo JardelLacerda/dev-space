@@ -18,7 +18,7 @@ export const ContainerMain = Styled.main`
     @media (min-width: 1000px){
         width: 1000px;
         margin: 0 auto;
-        background-position: center right 200px;
+        background-position: center right 150px;
     }
 
 `;
@@ -68,6 +68,9 @@ export const ContainerButtons = Styled.div`
     @media (min-width: 700px){
         height: auto;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: flex-start;
+        .MuiButtonBase-root{
+            margin-right: 50px;
+        }
     }
 `;
