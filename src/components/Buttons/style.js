@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Colors from "../../global/Colors";
 
 export const StyledButton = styled(Button)`
