@@ -1,6 +1,6 @@
 import Styled from "styled-components";
 import Colors from "../../global/Colors";
-import Foguete from "../../images/foguete.png";
+import Rocket from "../../images/rocket.png";
 
 export const ContainerMain = Styled.main`
     width: 100vw;
@@ -8,7 +8,7 @@ export const ContainerMain = Styled.main`
     background-color: ${Colors.BasicBlack};
     display: flex;
     flex-direction: column;
-    background-image: url(${Foguete});
+    background-image: url(${Rocket});
     background-repeat: no-repeat;
     background-position: center;
 
