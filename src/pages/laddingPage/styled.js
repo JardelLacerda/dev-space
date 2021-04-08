@@ -1,6 +1,6 @@
 import Styled from "styled-components";
 import Colors from "../../global/Colors";
-import Foguete from "../../images/foguete.png";
+import Rocket from "../../images/rocket.png";
 
 export const ContainerMain = Styled.main`
     width: 100vw;
@@ -8,7 +8,7 @@ export const ContainerMain = Styled.main`
     background-color: ${Colors.BasicBlack};
     display: flex;
     flex-direction: column;
-    background-image: url(${Foguete});
+    background-image: url(${Rocket});
     background-repeat: no-repeat;
     background-position: center;
 
@@ -18,7 +18,7 @@ export const ContainerMain = Styled.main`
     @media (min-width: 1000px){
         width: 1000px;
         margin: 0 auto;
-        background-position: center right 200px;
+        background-position: center right 150px;
     }
 
 `;
@@ -68,6 +68,9 @@ export const ContainerButtons = Styled.div`
     @media (min-width: 700px){
         height: auto;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: flex-start;
+        .MuiButtonBase-root{
+            margin-right: 50px;
+        }
     }
 `;

@@ -1,5 +1,36 @@
+import Button from "../../components/Buttons";
+import {
+  Division,
+  LocationProjects,
+  LocationTitle,
+  MainContainer,
+  Title,
+  TitleTwo,
+} from "./styled";
+
 const HomePage = () => {
-  return <h1>HOME PAGE</h1>;
+  return (
+    <MainContainer>
+      <Division>
+        <LocationTitle>
+          <Title>Meus Projetos</Title>
+          <Button nameBtn="Novo Projeto" />
+        </LocationTitle>
+        <LocationProjects>
+          <h2>Meus Projetos</h2>
+        </LocationProjects>
+      </Division>
+
+      <Division>
+        <LocationTitle>
+          <TitleTwo>Minhas Tarefas</TitleTwo>
+        </LocationTitle>
+        <LocationProjects>
+          <h2>Minhas tarefas</h2>
+        </LocationProjects>
+      </Division>
+    </MainContainer>
+  );
 };
 
 export default HomePage;
