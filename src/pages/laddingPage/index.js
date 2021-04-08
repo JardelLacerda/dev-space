@@ -1,4 +1,3 @@
-import Button from "../../components/Buttons";
 import StandardModal from "../../components/Modal";
 import {
   ContainerButtons,
@@ -22,13 +21,13 @@ const LaddingPage = () => {
           libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit
           amet nisi. Suco de cevadiss deixa as pessoas mais interessantis.
           Sapien in monti palavris qui num significa nadis i pareci latim.
-          
         </Description>
         <ContainerButtons>
-        <StandardModal buttonTxtOpen="Register">Aqui é o componente</StandardModal>
+          <StandardModal buttonTxtOpen="Register">
+            Aqui é o componente
+          </StandardModal>
 
-        <StandardModal buttonTxtOpen="Login"></StandardModal>
-
+          <StandardModal buttonTxtOpen="Login"></StandardModal>
         </ContainerButtons>
       </ContainerInfo>
     </ContainerMain>
