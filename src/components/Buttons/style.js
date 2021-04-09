@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import Colors from "../../global/Colors";
+import Colors from "../../global/Theme";
 
 export const StyledButton = styled(Button)`
   background: 0.25s ease, color 0.25s ease, box-shadow 0.15s ease;

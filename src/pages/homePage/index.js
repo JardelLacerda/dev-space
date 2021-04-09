@@ -6,30 +6,42 @@ import {
   MainContainer,
   Title,
   TitleTwo,
+  Container,
 } from "./styled";
 
-const HomePage = () => {
-  return (
-    <MainContainer>
-      <Division>
-        <LocationTitle>
-          <Title>Meus Projetos</Title>
-          <Button nameBtn="Novo Projeto" />
-        </LocationTitle>
-        <LocationProjects>
-          <h2>Meus Projetos</h2>
-        </LocationProjects>
-      </Division>
+import { useContext } from "react";
+import { ThemeContext } from "../../providers/theme";
 
-      <Division>
-        <LocationTitle>
-          <TitleTwo>Minhas Tarefas</TitleTwo>
-        </LocationTitle>
-        <LocationProjects>
-          <h2>Minhas tarefas</h2>
-        </LocationProjects>
-      </Division>
-    </MainContainer>
+const HomePage = () => {
+  const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
+    ThemeContext
+  );
+
+  return (
+    <Container theme={theme ? ThemeDark : ThemeLigth}>
+      <MainContainer>
+        <Division>
+          <LocationTitle>
+            <Title theme={theme ? ThemeDark : ThemeLigth}>Meus Projetos</Title>
+            <Button nameBtn="Novo Projeto" />
+          </LocationTitle>
+          <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
+            <h2>Meus Projetos</h2>
+          </LocationProjects>
+        </Division>
+
+        <Division>
+          <LocationTitle>
+            <TitleTwo theme={theme ? ThemeDark : ThemeLigth}>
+              Minhas Tarefas
+            </TitleTwo>
+          </LocationTitle>
+          <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
+            <h2>Minhas tarefas</h2>
+          </LocationProjects>
+        </Division>
+      </MainContainer>
+    </Container>
   );
 };
 

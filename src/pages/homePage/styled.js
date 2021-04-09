@@ -1,6 +1,11 @@
 import styled from "styled-components";
-import Colors from "../../global/Colors";
 import Rocket from "../../images/rocket.png";
+
+export const Container = styled.section`
+  width: 100vw;
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.PrimaryTheme};
+`;
 
 export const MainContainer = styled.main`
   width: 100%;
@@ -12,7 +17,7 @@ export const MainContainer = styled.main`
   margin: 0 auto;
 
   @media (min-width: 1000px) {
-    background-image: url(${Rocket});
+    //background-image: url(${Rocket});
     background-repeat: no-repeat;
     background-position: center;
     background-size: 10%;
@@ -41,21 +46,24 @@ export const Title = styled.h2`
   font-size: 20px;
   width: 100px;
   text-align: center;
-  color: ${Colors.BasicYellow};
+  color: ${({ theme }) => theme.TextColor};
   @media (min-width: 500px) {
     width: auto;
   }
 `;
 
 export const TitleTwo = styled(Title)`
+  color: ${({ theme }) => theme.TextColor};
   width: auto;
 `;
 
 export const LocationProjects = styled.div`
-  background-color: ${Colors.BasicWhite};
+  background-color: ${({ theme }) => theme.SecundaryTheme};
   width: 100%;
   min-height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  color: ${({ theme }) => theme.TextColor};
 `;
