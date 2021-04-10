@@ -7,33 +7,41 @@ import {
   MainContainer,
   Title,
   TitleTwo,
+  Container,
 } from "./styled";
 
+import { useContext } from "react";
+import { ThemeContext } from "../../providers/theme";
+
 const HomePage = () => {
+  const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
+  console.log("THEMA HOME PAGE - ", theme);
   return (
-    <>
+    <Container theme={theme ? ThemeDark : ThemeLigth}>
       <Header />
       <MainContainer>
         <Division>
           <LocationTitle>
-            <Title>Meus Projetos</Title>
+            <Title theme={theme ? ThemeDark : ThemeLigth}>Meus Projetos</Title>
             <Button nameBtn="Novo Projeto" />
           </LocationTitle>
-          <LocationProjects>
+          <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
             <h2>Meus Projetos</h2>
           </LocationProjects>
         </Division>
 
         <Division>
           <LocationTitle>
-            <TitleTwo>Minhas Tarefas</TitleTwo>
+            <TitleTwo theme={theme ? ThemeDark : ThemeLigth}>
+              Minhas Tarefas
+            </TitleTwo>
           </LocationTitle>
-          <LocationProjects>
+          <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
             <h2>Minhas tarefas</h2>
           </LocationProjects>
         </Division>
       </MainContainer>
-    </>
+    </Container>
   );
 };
 

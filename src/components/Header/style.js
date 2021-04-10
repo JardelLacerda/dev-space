@@ -1,27 +1,23 @@
 import styled from "styled-components";
-import Colors from "../../global/Colors";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Drawer from "@material-ui/core/Drawer";
 
 export const DivStyled = styled.div`
-  background-color: white;
-  color: red;
-
   width: auto;
 `;
 
 export const AppBarStyled = styled(AppBar)`
   && {
-    border-bottom: 1px solid ${Colors.BasicYellow};
-    background-color: ${Colors.BasicBlack};
+    border-bottom: 1px solid ${({ theme }) => theme.Details};
+    background-color: ${({ theme }) => theme.PrimaryTheme};
   }
 `;
 
 export const ToolbarStyled = styled(Toolbar)`
   display: flex;
   justify-content: space-between;
-  color: ${Colors.BasicYellow};
+  color: ${({ theme }) => theme.Details};
 
   & div.tempDesktop {
     display: none;
@@ -42,6 +38,6 @@ export const ToolbarStyled = styled(Toolbar)`
 
 export const DrawerStyled = styled(Drawer)`
   .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
-    background-color: #ffd028;
+    background-color: ${({ theme }) => theme.Details};
   }
 `;
