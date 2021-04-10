@@ -8,14 +8,16 @@ const Colors = {
 export const ThemeDark = {
   PrimaryTheme: "#000",
   SecundaryTheme: "#FFF",
-  TextColor: "#FED400",
+  TextColor: "#fff",
+  Details: "#FED400",
   SecundaryColor: "#1A1B1D",
 };
 
 export const ThemeLigth = {
-  PrimaryTheme: "#FEFFD0",
-  SecundaryTheme: "#fff",
+  PrimaryTheme: "#fff",
+  SecundaryTheme: "#FEFFD0",
   TextColor: "#000",
+  Details: "#FED400",
   SecundaryColor: "#1A1B1D",
 };
 

@@ -1,7 +1,6 @@
 import Router from "./routes";
 
-const App = ({ theme }) => {
-  console.log(theme);
+const App = () => {
   return <Router />;
 };
 

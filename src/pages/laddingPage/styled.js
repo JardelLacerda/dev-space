@@ -44,7 +44,7 @@ export const Title = styled.h1`
 `;
 
 export const SubTitle = styled.h3`
-  color: ${({ theme }) => theme.TextColor};
+  color: ${({ theme }) => theme.Details};
   margin: 0 10px;
   font-weight: 300;
   font-style: italic;

@@ -4,21 +4,21 @@ import { ThemeDark, ThemeLigth } from "../../global/Theme";
 export const ThemeContext = createContext({});
 
 const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState();
 
   const toggleTheme = () => {
     if (theme) {
-      window.localStorage.setItem("dark", false);
+      window.localStorage.setItem("theme", false);
+      setTheme(false);
     } else {
-      window.localStorage.setItem("dark", true);
+      window.localStorage.setItem("theme", true);
+      setTheme(true);
     }
-
-    setTheme(!theme);
   };
 
   useEffect(() => {
-    const localTheme = window.localStorage.getItem("dark");
-    localTheme && setTheme(localTheme);
+    const localTheme = window.localStorage.getItem("theme");
+    localTheme && setTheme(JSON.parse(localTheme));
   }, []);
 
   return (

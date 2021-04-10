@@ -13,9 +13,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
 
 const LaddingPage = () => {
-  const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
-    ThemeContext
-  );
+  const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
   return (
     <Container theme={theme ? ThemeDark : ThemeLigth}>
       <ContainerMain theme={theme ? ThemeDark : ThemeLigth}>
