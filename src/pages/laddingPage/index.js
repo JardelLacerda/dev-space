@@ -11,9 +11,15 @@ import {
 
 import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
+import { LoginContext } from "../../providers/login";
+import RequisitionLogin from "../../servers/login";
 
 const LaddingPage = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
+  const { token, user_id } = useContext(LoginContext);
+
+  console.log(token);
+  console.log(user_id);
   return (
     <Container theme={theme ? ThemeDark : ThemeLigth}>
       <ContainerMain theme={theme ? ThemeDark : ThemeLigth}>
@@ -32,11 +38,8 @@ const LaddingPage = () => {
             pareci latim.
           </Description>
           <ContainerButtons>
-            <StandardModal buttonTxtOpen="Register">
-              Aqui é o componente
-            </StandardModal>
-
-            <StandardModal buttonTxtOpen="Login"></StandardModal>
+            <StandardModal buttonTxtOpen="Register"></StandardModal>
+            <RequisitionLogin />
           </ContainerButtons>
         </ContainerInfo>
       </ContainerMain>
