@@ -43,7 +43,7 @@ const RequisitionLogin = () => {
         setToken(resp.data.accessToken);
         setId(jwt_decode(resp.data.accessToken).sub);
         reset();
-        history.push(`/home/${user_id}`);
+        history.push(`/home`);
       })
       .catch((err) => console.log(err));
   };
