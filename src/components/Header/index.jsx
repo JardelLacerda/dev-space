@@ -49,17 +49,17 @@ const Header = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Profile", "Sair", "Home", "About", "Theme Mode"].map(
+        {["Theme Mode", "Home", "Perfil", "Sobre", "Sair"].map(
           (text, index) => (
             <ListItem button key={text}>
               <ListItemIcon onClick={toggleTheme}>
-                {text === "Profile" ? (
+                {text === "Perfil" ? (
                   <AccountCircle />
                 ) : text === "Sair" ? (
                   <ExitToApp />
                 ) : text === "Home" ? (
                   <Home />
-                ) : text === "About" ? (
+                ) : text === "Sobre" ? (
                   <Description />
                 ) : text === "Theme Mode" ? (
                   <Brightness4Icon onClick={toggleTheme} />
@@ -97,10 +97,10 @@ const Header = () => {
             <Button color="inherit" onClick={toggleTheme}>
               Theme Mode
             </Button>
-            <Button color="inherit">Profile</Button>
-            <Button color="inherit">Sair</Button>
             <Button color="inherit">Home</Button>
-            <Button color="inherit">About</Button>
+            <Button color="inherit">Perfil</Button>
+            <Button color="inherit">Sobre</Button>
+            <Button color="inherit">Sair</Button>
           </div>
         </ToolbarStyled>
       </AppBarStyled>
