@@ -45,44 +45,45 @@ to use global -
 
 */
 
-import { TextField } from "@material-ui/core";
 import { ContainerForm, IconForm } from "./style";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "../Buttons";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-    marginTop: 0,
-    backgroundColor: "#fff",
-    borderRadius: "4px",
-  },
-}));
+import { useContext } from "react";
+import { ThemeContext } from "../../providers/theme";
 
 const Form = ({ instructions }) => {
-  const { icone, inputList, buttonName, formAction } = instructions;
-  const classes = useStyles();
+  const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
+
+  const {
+    icone,
+    inputList,
+    buttonName,
+    formAction,
+    register,
+    errors,
+  } = instructions;
+
   return (
-    <ContainerForm className={classes.container} onSubmit={formAction}>
+    <ContainerForm theme={theme ? ThemeDark : ThemeLigth} onSubmit={formAction}>
       <IconForm src={icone.icone} width={icone.width} />
-      {inputList.map((input) => {
+      {inputList.map((input, index) => {
         return (
-          <TextField
-            id={input[0]}
-            label={input[1]}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
+          <>
+            <input
+              key={index}
+              name={input[0]}
+              placeholder={input[1]}
+              {...register(input[0])}
+            />
+            {errors && (
+              <p style={{ color: "red", fontSize: "10px" }}>
+                {errors[input[0]]?.message}
+              </p>
+            )}
+          </>
         );
       })}
-      <Button nameBtn={buttonName} />
+
+      <button>{buttonName}</button>
     </ContainerForm>
   );
 };
