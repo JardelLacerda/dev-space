@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { ThemeDark, ThemeLigth } from "../../global/Theme";
+import { ThemeDark, ThemeDarkForm, ThemeLigth } from "../../global/Theme";
 
 export const ThemeContext = createContext({});
 
@@ -23,7 +23,7 @@ const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider
-      value={{ theme, toggleTheme, ThemeDark, ThemeLigth }}
+      value={{ theme, toggleTheme, ThemeDark, ThemeLigth, ThemeDarkForm }}
     >
       {children}
     </ThemeContext.Provider>

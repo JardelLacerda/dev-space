@@ -45,13 +45,13 @@ to use global -
 
 */
 
-import { ContainerForm, IconForm } from "./style";
+import { ContainerForm, IconForm, Input, Button } from "./style";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
 
 const Form = ({ instructions }) => {
-  const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
+  const { theme, ThemeDarkForm, ThemeLigth } = useContext(ThemeContext);
 
   const {
     icone,
@@ -63,12 +63,15 @@ const Form = ({ instructions }) => {
   } = instructions;
 
   return (
-    <ContainerForm theme={theme ? ThemeDark : ThemeLigth} onSubmit={formAction}>
+    <ContainerForm
+      theme={theme ? ThemeDarkForm : ThemeLigth}
+      onSubmit={formAction}
+    >
       <IconForm src={icone.icone} width={icone.width} />
       {inputList.map((input, index) => {
         return (
           <>
-            <input
+            <Input
               key={index}
               name={input[0]}
               placeholder={input[1]}
@@ -83,7 +86,7 @@ const Form = ({ instructions }) => {
         );
       })}
 
-      <button>{buttonName}</button>
+      <Button>{buttonName}</Button>
     </ContainerForm>
   );
 };
