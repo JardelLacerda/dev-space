@@ -62,6 +62,7 @@ export const LocationProjects = styled.div`
   width: 100%;
   min-height: 300px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
