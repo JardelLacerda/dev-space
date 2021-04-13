@@ -30,3 +30,7 @@ const Column = ({ column, tasks }) => {
 };
 
 export default Column;
+
+/*{tasks.map((task, index) => (
+                <Task key={task.id} task={task} index={index} />
+              ))} */

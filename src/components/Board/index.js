@@ -11,9 +11,16 @@ import { useParams } from "react-router";
 
 const Board = () => {
   const { token } = useContext(LoginContext);
-  const { project, tasks, getTasks, getProjects, FilterAlgo } = useContext(
-    ProjectTaks
-  );
+  const {
+    loadProject,
+    usedProject,
+    tasksProject,
+    loadTask,
+    getTasks,
+    getProjects,
+  } = useContext(ProjectTaks);
+
+  //const { columnsOrder, columns } = usedProject;
 
   const { id } = useParams();
   const [data, setData] = useState(initialData);
@@ -86,16 +93,25 @@ const Board = () => {
     getProjects(id);
   }, []);
 
+  //console.log(usedProject);
+  //console.log(tasksProject);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
-        {data.columnsOrder.map((columnId) => {
-          const column = data.columns[columnId];
-          const tasks = column.taskIds.map((taskId) =>
-            data.tasks.find((task) => task.id === taskId)
-          );
-          return <Column key={column.id} column={column} tasks={tasks} />;
-        })}
+        {loadProject &&
+          loadTask &&
+          usedProject.columnsOrder.map((columnId) => {
+            const column = usedProject.columns[columnId];
+            const tasks = column?.taskIds.map((taskId) => {
+              const taskTest = tasksProject?.find((task) => task.id === taskId);
+
+              return taskTest;
+            });
+            //console.log(column.id, column, tasks);
+
+            return <Column key={column.id} column={column} tasks={tasks} />;
+          })}
       </Container>
     </DragDropContext>
   );
@@ -104,4 +120,13 @@ const Board = () => {
 export default Board;
 
 /*
+{loadProject &&
+          usedProject.columnsOrder.map((columnId) => {
+            const column = usedProject.columns[columnId];
+            const tasks = column.taskIds.map((taskId) =>
+              tasksProject?.find((task) => task.id === taskId)
+            );
+            return <Column key={} column={column} tasks={tasks} />;
+          })}
+
  */

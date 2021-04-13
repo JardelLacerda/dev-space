@@ -22,7 +22,13 @@ const HomePage = () => {
   const history = useHistory();
   const { id } = useParams();
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
-  const { project, tasks, getProjects, getTasks } = useContext(ProjectTaks);
+  const {
+    myProjects,
+    projectParticipants,
+    myTasks,
+    getProjects,
+    getTasks,
+  } = useContext(ProjectTaks);
 
   useEffect(() => {
     getProjects(id);
@@ -40,31 +46,29 @@ const HomePage = () => {
             <RequisitionNewProject />
           </LocationTitle>
           <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
-            {project.myProjects &&
-              project.myProjects.map((pj, index) => {
-                return (
-                  <p
-                    key={index}
-                    onClick={() => history.push(`/project/${pj.id}`)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {pj.title} {pj.id}
-                  </p>
-                );
-              })}
+            {myProjects?.map((pj, index) => {
+              return (
+                <p
+                  key={index}
+                  onClick={() => history.push(`/project/${pj.id}`)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {pj.title} {pj.id}
+                </p>
+              );
+            })}
 
-            {project.projectParticipants &&
-              project.projectParticipants.map((pj, index) => {
-                return (
-                  <p
-                    key={index}
-                    onClick={() => history.push(`/project/${pj.id}`)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {pj.title} {pj.id}
-                  </p>
-                );
-              })}
+            {projectParticipants?.map((pj, index) => {
+              return (
+                <p
+                  key={index}
+                  onClick={() => history.push(`/project/${pj.id}`)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {pj.title} {pj.id}
+                </p>
+              );
+            })}
           </LocationProjects>
         </Division>
 
@@ -75,18 +79,17 @@ const HomePage = () => {
             </TitleTwo>
           </LocationTitle>
           <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
-            {tasks.myTask &&
-              tasks.myTask.map((task, index) => {
-                return (
-                  <p
-                    key={index}
-                    onClick={() => history.push(`/project/${task.project_id}`)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {task.title} {task.id}
-                  </p>
-                );
-              })}
+            {myTasks?.map((task, index) => {
+              return (
+                <p
+                  key={index}
+                  onClick={() => history.push(`/project/${task.project_id}`)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {task.title} {task.id}
+                </p>
+              );
+            })}
           </LocationProjects>
         </Division>
       </MainContainer>

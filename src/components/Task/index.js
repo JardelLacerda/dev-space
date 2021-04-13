@@ -26,10 +26,6 @@ const Task = ({ task, index }) => {
             </div>
 
             <h3>{task.title}</h3>
-
-            {task.tags.map((tag, index) => (
-              <Chip key={index} label={tag} variant="outlined" size="small" />
-            ))}
           </Container>
         );
       }}
@@ -38,3 +34,10 @@ const Task = ({ task, index }) => {
 };
 
 export default Task;
+
+/*
+{task.tags.map((tag, index) => (
+              <Chip key={index} label={tag} variant="outlined" size="small" />
+            ))}
+
+*/

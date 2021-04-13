@@ -8,19 +8,16 @@ export const ProjectTaks = createContext({});
 const ProjectTasksProvider = ({ children }) => {
   const { user_id, token } = useContext(LoginContext);
 
-  const [id, setId] = useState();
+  const [loadTask, setLoadTask] = useState(false);
+  const [loadProject, setLoadProject] = useState(false);
 
-  const [project, setProject] = useState({
-    projects: [],
-    myProjects: [],
-    projectParticipants: [],
-    usedProject: [],
-  });
+  const [projects, setProjects] = useState([]);
+  const [myProjects, setMyProjects] = useState([]);
+  const [projectParticipants, setProjectParticipants] = useState([]);
+  const [usedProject, setUsedProject] = useState({});
 
-  const [tasks, setTasks] = useState({
-    taskProject: [],
-    myTask: [],
-  });
+  const [tasksProject, setTasksProject] = useState([]);
+  const [myTasks, setMyTasks] = useState([]);
 
   const getProjects = async (idUser) => {
     await axios
@@ -30,21 +27,30 @@ const ProjectTasksProvider = ({ children }) => {
         },
       })
       .then(async (resp) => {
-        setProject({
-          projects: resp.data,
-          myProjects: resp.data.filter((project) => {
-            return Number(project.userId) === Number(idUser);
-          }),
+        setProjects(resp.data);
 
-          projectParticipants: resp.data.filter((project) => {
+        setUsedProject(
+          resp.data.find((pj) => {
+            return Number(idUser) === Number(pj.id);
+          })
+        );
+
+        setMyProjects(
+          resp.data.filter((project) => {
+            return Number(project.userId) === Number(idUser);
+          })
+        );
+
+        setProjectParticipants(
+          resp.data.filter((project) => {
             if (project.participants.includes(Number(idUser))) {
               return project;
             }
-          }),
-          usedProject: resp.data.find((pj) => {
-            return Number(idUser) === Number(pj.id);
-          }),
-        });
+          })
+        );
+      })
+      .then(() => {
+        setLoadProject(true);
       });
   };
 
@@ -56,32 +62,43 @@ const ProjectTasksProvider = ({ children }) => {
         },
       })
       .then((resp) => {
-        setTasks({
-          taskProject:
-            idProject !== undefined &&
-            resp.data.filter((task) => {
-              if (task.participants.includes(Number(idProject))) {
-                return task;
-              }
-            }),
-          myTask:
-            idUser !== undefined &&
-            resp.data.filter((task) => {
-              if (task.participants.includes(Number(idUser))) {
-                return task;
-              }
-            }),
-        });
-      });
-  };
+        setTasksProject(
+          resp.data.filter((task) => {
+            if (Number(task.project_id) === Number(idProject)) {
+              task.id = `${task.id}`;
+              task.project_id = `${task.project_id}`;
+              return task;
+            }
+          })
+        );
 
-  const FilterAlgo = () => {
-    console.log(project.usedProject);
+        setMyTasks(
+          resp.data.filter((task) => {
+            if (task.participants.includes(Number(idUser))) {
+              return task;
+            }
+          })
+        );
+      })
+      .then(() => {
+        setLoadTask(true);
+      });
   };
 
   return (
     <ProjectTaks.Provider
-      value={{ project, tasks, getProjects, getTasks, FilterAlgo }}
+      value={{
+        projects,
+        myProjects,
+        projectParticipants,
+        usedProject,
+        tasksProject,
+        myTasks,
+        loadProject,
+        loadTask,
+        getProjects,
+        getTasks,
+      }}
     >
       {children}
     </ProjectTaks.Provider>
