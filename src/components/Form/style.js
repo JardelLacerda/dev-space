@@ -25,7 +25,6 @@ export const Input = Styled.input`
     background-color: papayawhip;
     border: solid;
     border-radius: 5px;
-
     
     ::placeholder {
     font-size: 14px;
@@ -53,3 +52,13 @@ export const Button = Styled.button`
   }
 
 `;
+
+export const ErrorMessage = Styled.div`
+    background-color: lightcoral;
+    color: black;
+    font-size: 12px;
+    width: 140px;
+    text-align:center;
+    margin: 5px 0 5px 0;
+    transform: translate(20%)
+    `;
