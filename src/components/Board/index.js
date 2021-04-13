@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import initialData from "./initial-data";
 import Column from "../Column";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Container } from "./style";
 
+import { useContext } from "react";
+import { LoginContext } from "../../providers/login";
+import { ProjectTaks } from "../../providers/project-tasks";
+import { useParams } from "react-router";
+
 const Board = () => {
+  const { token } = useContext(LoginContext);
+  const { project, tasks, getTasks, getProjects, FilterAlgo } = useContext(
+    ProjectTaks
+  );
+
+  const { id } = useParams();
   const [data, setData] = useState(initialData);
 
   const onDragEnd = (result) => {
@@ -24,7 +35,7 @@ const Board = () => {
     const start = data.columns[source.droppableId];
     const finish = data.columns[destination.droppableId];
 
-    console.log(start);
+    // console.log(start);
 
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
@@ -70,6 +81,11 @@ const Board = () => {
     setData(newState);
   };
 
+  useEffect(() => {
+    getTasks(id, undefined);
+    getProjects(id);
+  }, []);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
@@ -86,3 +102,6 @@ const Board = () => {
 };
 
 export default Board;
+
+/*
+ */

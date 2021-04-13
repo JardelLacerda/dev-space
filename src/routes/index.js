@@ -11,10 +11,10 @@ const Router = () => {
       <Route exact path="/">
         <LaddingPage />
       </Route>
-      <Route exact path="/home">
+      <Route exact path="/home/:id">
         <HomePage />
       </Route>
-      <Route>
+      <Route exact path="/project/:id">
         <Project />
       </Route>
       <Route>
