@@ -14,7 +14,7 @@ import axios from "axios";
 import { useHistory } from "react-router";
 
 const RequisitionLogin = () => {
-  const { setToken, setId, user_id } = useContext(LoginContext);
+  const { setVaribles } = useContext(LoginContext);
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -39,11 +39,12 @@ const RequisitionLogin = () => {
         },
       })
       .then((resp) => {
-        console.log(resp);
-        setToken(resp.data.accessToken);
-        setId(jwt_decode(resp.data.accessToken).sub);
+        setVaribles(
+          jwt_decode(resp.data.accessToken).sub,
+          resp.data.accessToken
+        );
         reset();
-        history.push(`/home`);
+        history.push(`/home/${jwt_decode(resp.data.accessToken).sub}`);
       })
       .catch((err) => console.log(err));
   };
