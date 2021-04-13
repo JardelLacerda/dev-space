@@ -3,6 +3,7 @@ import Page404 from "../pages/error404";
 
 import HomePage from "../pages/homePage";
 import LaddingPage from "../pages/laddingPage";
+import Project from "../pages/project";
 
 const Router = () => {
   return (
@@ -10,8 +11,11 @@ const Router = () => {
       <Route exact path="/">
         <LaddingPage />
       </Route>
-      <Route exact path="/home">
+      <Route exact path="/home/:id">
         <HomePage />
+      </Route>
+      <Route exact path="/project/:id">
+        <Project />
       </Route>
       <Route>
         <Page404 />

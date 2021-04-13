@@ -1,11 +1,10 @@
 import Styled from "styled-components";
-import Colors from "../../global/Colors";
 
 export const ContainerForm = Styled.form`
-    background-color: ${Colors.BasicGrayBlack};
+    background-color: ${({ theme }) => theme.PrimaryTheme};
     width: 80%;
     max-width: 300px;
-    border: solid 1px ${Colors.BasicYellow};
+    border: solid 1px ${({ theme }) => theme.Details};
     display: flex;
     flex-direction: column;
     align-items: center;

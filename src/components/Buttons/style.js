@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import Colors from "../../global/Colors";
+import Colors from "../../global/Theme";
 
 export const StyledButton = styled(Button)`
   background: 0.25s ease, color 0.25s ease, box-shadow 0.15s ease;
@@ -17,18 +17,19 @@ export const StyledButton = styled(Button)`
 
   & span.MuiButton-label {
     padding: 0.4em;
-    width: 120px;
+    width: 110px;
     height: 30px;
     color: ${Colors.BasicYellow};
 
     font-weight: bold;
-    font-size: 18px;
+    font-size: 13px;
     cursor: pointer;
 
     @media (min-width: 700px) {
-      height: 50px;
-      width: 140px;
-      font-size: 22px;
+      height: ${(props) => (props.landing ? "50px" : "30px")};
+      width: ${(props) => (props.landing ? "140px" : "180px")};
+
+      font-size: 18px;
     }
   }
   & .MuiTouchRipple-root {
