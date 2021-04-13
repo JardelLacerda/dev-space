@@ -4,6 +4,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { useState } from "react";
 import Button from "../Buttons";
+import { Paper } from "./style";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -11,21 +12,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    display: "flex",
-    flexFlow: "column wrap",
-    alignItems: "center",
-  },
 }));
 
-const StandardModal = ({
-    buttonTxtOpen,
-  children,
-}) => {
+const StandardModal = ({ buttonTxtOpen, children }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -38,9 +27,8 @@ const StandardModal = ({
 
   return (
     <div>
-
-    <Button onClick={handleOpen} nameBtn={buttonTxtOpen}/>
-      <Modal    
+      <Button onClick={handleOpen} nameBtn={buttonTxtOpen} />
+      <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
@@ -53,17 +41,14 @@ const StandardModal = ({
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
-              {children}
-            <Button nameBtn="Close"
-              onClick={handleClose}
-            />
-          </div>
+          <Paper>
+            {children}
+            {/* <Button nameBtn="Close" onClick={handleClose} /> */}
+          </Paper>
         </Fade>
       </Modal>
     </div>
   );
 };
 
-
-export default StandardModal
+export default StandardModal;
