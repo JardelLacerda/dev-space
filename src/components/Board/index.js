@@ -38,8 +38,6 @@ const Board = () => {
     const start = usedProject.columns[source.droppableId];
     const finish = usedProject.columns[destination.droppableId];
 
-    // console.log(start);
-
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
       newTaskIds.splice(source.index, 1);
@@ -49,11 +47,11 @@ const Board = () => {
         ...start,
         taskIds: newTaskIds,
       };
-
       const newState = {
         ...usedProject,
         columns: { ...usedProject.columns, [newColumn.id]: newColumn },
       };
+
       actulyProject(newState, id);
       setUsedProject(newState);
       return;
@@ -81,6 +79,7 @@ const Board = () => {
         [newFinish.id]: newFinish,
       },
     };
+
     actulyProject(newState, id);
     setUsedProject(newState);
   };
@@ -102,14 +101,11 @@ const Board = () => {
         ) : (
           usedProject.columnsOrder.map((columnId) => {
             const column = usedProject.columns[columnId];
-            const tasks = column?.taskIds.map((taskId) => {
-              const taskTest = tasksProject?.find(
+            const tasks = column?.taskIds.map((taskId) =>
+              tasksProject.find(
                 (task) => toString(task.id) === toString(taskId)
-              );
-
-              return taskTest;
-            });
-
+              )
+            );
             return <Column key={column.id} column={column} tasks={tasks} />;
           })
         )}

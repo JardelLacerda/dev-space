@@ -5,6 +5,7 @@ import Task from "../Task";
 import { Container, Title, TaskList } from "./style";
 
 const Column = ({ column, tasks }) => {
+  //console.log("TASKS DAS COLUNAS", tasks, column);
   return (
     <Container>
       <Title>{column.title}</Title>
@@ -24,7 +25,11 @@ const Column = ({ column, tasks }) => {
           );
         }}
       </Droppable>
-      <ButtonAddTask />
+      {
+        //<ButtonAddTask />
+      }
+
+      <CreateCard idColumn={column.id} />
     </Container>
   );
 };

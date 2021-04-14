@@ -32,7 +32,7 @@ const HomePage = () => {
   useEffect(() => {
     getMyProjects(id);
     getProjectParticipant(id);
-    getTasks(undefined, id);
+    getTasks(id);
   }, []);
 
   return (
