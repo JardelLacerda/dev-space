@@ -4,6 +4,7 @@ import Page404 from "../pages/error404";
 
 import HomePage from "../pages/homePage";
 import LaddingPage from "../pages/laddingPage";
+import Profile from "../pages/profile";
 import Project from "../pages/project";
 
 const Router = () => {
@@ -22,7 +23,7 @@ const Router = () => {
         <About />
       </Route>
       <Route exact path="/profile">
-        <About />
+        <Profile />
       </Route>
       <Route>
         <Page404 />
