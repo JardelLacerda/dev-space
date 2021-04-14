@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import initialData from "./initial-data";
 import Column from "../Column";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Container } from "./style";
@@ -18,12 +17,9 @@ const Board = () => {
     actulyProject,
   } = useContext(ProjectTaks);
 
-  //const { columnsOrder, columns } = usedProject;
-
   const [loadProject, setLoadProject] = useState(true);
 
   const { id } = useParams();
-  const [data, setData] = useState(initialData);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -114,8 +110,6 @@ const Board = () => {
               return taskTest;
             });
 
-            //console.log(column.id, column, tasks);
-
             return <Column key={column.id} column={column} tasks={tasks} />;
           })
         )}
@@ -125,15 +119,3 @@ const Board = () => {
 };
 
 export default Board;
-
-/*
-{loadProject &&
-          usedProject.columnsOrder.map((columnId) => {
-            const column = usedProject.columns[columnId];
-            const tasks = column.taskIds.map((taskId) =>
-              tasksProject?.find((task) => task.id === taskId)
-            );
-            return <Column key={} column={column} tasks={tasks} />;
-          })}
-
- */
