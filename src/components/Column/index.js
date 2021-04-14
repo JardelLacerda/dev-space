@@ -1,5 +1,6 @@
 import { Droppable } from "react-beautiful-dnd";
 import ButtonAddTask from "../ButtonAddTask";
+import CreateCard from "../CreateCard";
 import Task from "../Task";
 import { Container, Title, TaskList } from "./style";
 
@@ -23,7 +24,6 @@ const Column = ({ column, tasks }) => {
           );
         }}
       </Droppable>
-
       <ButtonAddTask />
     </Container>
   );

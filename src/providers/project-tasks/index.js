@@ -1,6 +1,5 @@
-import { createContext, useEffect, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { LoginContext } from "../login";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export const ProjectTaks = createContext({});
@@ -8,10 +7,6 @@ export const ProjectTaks = createContext({});
 const ProjectTasksProvider = ({ children }) => {
   const { user_id, token } = useContext(LoginContext);
 
-  const [loadTask, setLoadTask] = useState(false);
-  const [loadProject, setLoadProject] = useState(false);
-
-  const [projects, setProjects] = useState([]);
   const [myProjects, setMyProjects] = useState([]);
   const [projectParticipants, setProjectParticipants] = useState([]);
   const [usedProject, setUsedProject] = useState({});
@@ -19,28 +14,41 @@ const ProjectTasksProvider = ({ children }) => {
   const [tasksProject, setTasksProject] = useState([]);
   const [myTasks, setMyTasks] = useState([]);
 
-  const getProjects = async (idUser) => {
+  const getUsedProject = async (idUser) => {
     await axios
-      .get(`https://dev-space-json-server.herokuapp.com/project/`, {
+      .get(`https://dev-space-json-server.herokuapp.com/project?id=${idUser}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(async (resp) => {
-        setProjects(resp.data);
+      .then((resp) => {
+        setUsedProject(resp.data[0]);
+      });
+  };
 
-        setUsedProject(
-          resp.data.find((pj) => {
-            return Number(idUser) === Number(pj.id);
-          })
-        );
+  const getMyProjects = async (idUser) => {
+    await axios
+      .get(
+        `https://dev-space-json-server.herokuapp.com/project?userId=${idUser}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        setMyProjects(resp.data);
+      });
+  };
 
-        setMyProjects(
-          resp.data.filter((project) => {
-            return Number(project.userId) === Number(idUser);
-          })
-        );
-
+  const getProjectParticipant = async (idUser) => {
+    await axios
+      .get(`https://dev-space-json-server.herokuapp.com/project`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => {
         setProjectParticipants(
           resp.data.filter((project) => {
             if (project.participants.includes(Number(idUser))) {
@@ -48,13 +56,10 @@ const ProjectTasksProvider = ({ children }) => {
             }
           })
         );
-      })
-      .then(() => {
-        setLoadProject(true);
       });
   };
 
-  const getTasks = async (idProject, idUser) => {
+  const getTasks = async (idUser) => {
     await axios
       .get("https://dev-space-json-server.herokuapp.com/tasks/", {
         headers: {
@@ -62,16 +67,6 @@ const ProjectTasksProvider = ({ children }) => {
         },
       })
       .then((resp) => {
-        setTasksProject(
-          resp.data.filter((task) => {
-            if (Number(task.project_id) === Number(idProject)) {
-              task.id = `${task.id}`;
-              task.project_id = `${task.project_id}`;
-              return task;
-            }
-          })
-        );
-
         setMyTasks(
           resp.data.filter((task) => {
             if (task.participants.includes(Number(idUser))) {
@@ -79,24 +74,55 @@ const ProjectTasksProvider = ({ children }) => {
             }
           })
         );
-      })
-      .then(() => {
-        setLoadTask(true);
       });
+  };
+
+  const getTasksProject = async (idProject) => {
+    await axios
+      .get(
+        `https://dev-space-json-server.herokuapp.com/tasks?project_id=${idProject}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        setTasksProject(
+          resp.data.map((task) => {
+            task.id = `${task.id}`;
+            return task;
+          })
+        );
+      });
+  };
+
+  const actulyProject = async (data, id) => {
+    await axios.patch(
+      `https://dev-space-json-server.herokuapp.com/project/${id}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   };
 
   return (
     <ProjectTaks.Provider
       value={{
-        projects,
         myProjects,
         projectParticipants,
         usedProject,
         tasksProject,
         myTasks,
-        loadProject,
-        loadTask,
-        getProjects,
+        actulyProject,
+        setUsedProject,
+        getMyProjects,
+        getUsedProject,
+        getProjectParticipant,
+        getTasksProject,
         getTasks,
       }}
     >

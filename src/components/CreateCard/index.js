@@ -24,11 +24,10 @@ const CreateCard = () => {
     resolver: yupResolver(schema),
   });
   const handleMyForm = (data) => {
-    data.time = value;
     console.log(data);
   };
   return (
-    <StandardModal buttonTxtOpen="Teste">
+    <StandardModal buttonTxtOpen="+">
       <Modal>
         <form onSubmit={handleSubmit(handleMyForm)}>
           <div>
