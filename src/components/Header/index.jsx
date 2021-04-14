@@ -22,7 +22,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const Header = () => {
   const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
@@ -34,6 +34,7 @@ const Header = () => {
   });
 
   const history = useHistory();
+  const { id } = useParams();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -106,7 +107,7 @@ const Header = () => {
             <Button color="inherit" onClick={toggleTheme}>
               Theme Mode
             </Button>
-            <Button color="inherit" onClick={() => history.push("/home")}>
+            <Button color="inherit" onClick={() => history.push(`/home/${id}`)}>
               Home
             </Button>
             <Button color="inherit" onClick={() => history.push("/profile")}>
