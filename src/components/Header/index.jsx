@@ -22,14 +22,18 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
     ThemeContext
   );
+
   const [state, setState] = useState({
     right: false,
   });
+
+  const history = useHistory();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -73,6 +77,11 @@ const Header = () => {
     </div>
   );
 
+  const Logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
+
   return (
     <DivStyled>
       <AppBarStyled position="static" theme={theme ? ThemeDark : ThemeLigth}>
@@ -97,10 +106,18 @@ const Header = () => {
             <Button color="inherit" onClick={toggleTheme}>
               Theme Mode
             </Button>
-            <Button color="inherit">Home</Button>
-            <Button color="inherit">Perfil</Button>
-            <Button color="inherit">Sobre</Button>
-            <Button color="inherit">Sair</Button>
+            <Button color="inherit" onClick={() => history.push("/home")}>
+              Home
+            </Button>
+            <Button color="inherit" onClick={() => history.push("/profile")}>
+              Perfil
+            </Button>
+            <Button color="inherit" onClick={() => history.push("/about")}>
+              Sobre
+            </Button>
+            <Button color="inherit" onClick={() => Logout()}>
+              Sair
+            </Button>
           </div>
         </ToolbarStyled>
       </AppBarStyled>

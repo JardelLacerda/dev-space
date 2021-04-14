@@ -1,4 +1,5 @@
 import { Switch, Route } from "react-router-dom";
+import About from "../pages/about";
 import Page404 from "../pages/error404";
 
 import HomePage from "../pages/homePage";
@@ -16,6 +17,12 @@ const Router = () => {
       </Route>
       <Route exact path="/project/:id">
         <Project />
+      </Route>
+      <Route exact path="/about">
+        <About />
+      </Route>
+      <Route exact path="/profile">
+        <About />
       </Route>
       <Route>
         <Page404 />
