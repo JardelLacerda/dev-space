@@ -54,26 +54,45 @@ const Header = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Theme Mode", "Home", "Perfil", "Sobre", "Sair"].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon onClick={toggleTheme}>
-                {text === "Perfil" ? (
-                  <AccountCircle />
-                ) : text === "Sair" ? (
-                  <ExitToApp />
-                ) : text === "Home" ? (
-                  <Home />
-                ) : text === "Sobre" ? (
-                  <Description />
-                ) : text === "Theme Mode" ? (
-                  <Brightness4Icon onClick={toggleTheme} />
-                ) : null}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          )
-        )}
+        <ListItem button onClick={toggleTheme}>
+          <ListItemIcon>
+            <Brightness4Icon onClick={toggleTheme} />
+          </ListItemIcon>
+
+          <ListItemText primary="Theme Mode" />
+        </ListItem>
+
+        <ListItem button onClick={() => history.push("/profile")}>
+          <ListItemIcon>
+            <AccountCircle />
+          </ListItemIcon>
+
+          <ListItemText primary="Perfil" />
+        </ListItem>
+
+        <ListItem button onClick={() => history.push(`/home/${id}`)}>
+          <ListItemIcon>
+            <Home />
+          </ListItemIcon>
+
+          <ListItemText primary="Home" />
+        </ListItem>
+
+        <ListItem button onClick={() => history.push("/about")}>
+          <ListItemIcon>
+            <Description />
+          </ListItemIcon>
+
+          <ListItemText primary="Sobre" />
+        </ListItem>
+
+        <ListItem button onClick={() => Logout()}>
+          <ListItemIcon>
+            <ExitToApp />
+          </ListItemIcon>
+
+          <ListItemText primary="Sair" />
+        </ListItem>
       </List>
     </div>
   );
