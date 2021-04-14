@@ -75,6 +75,7 @@ const Form = ({ instructions }) => {
               error
               key={index}
               name={input[0]}
+              type={input[2]}
               placeholder={input[1]}
               {...register(input[0])}
             />

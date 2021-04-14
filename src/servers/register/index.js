@@ -50,8 +50,8 @@ const RequisitionRegister = () => {
           inputList: [
             ["name", "digite seu nome"],
             ["email", "digite seu email"],
-            ["password", "digite sua senha"],
-            ["passwordConfirm", "confirme sua senha"],
+            ["password", "digite sua senha", "password"],
+            ["passwordConfirm", "confirme sua senha", "password"],
           ],
           formAction: handleSubmit(onSubmit),
           register: register,
