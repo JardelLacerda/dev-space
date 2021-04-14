@@ -57,7 +57,7 @@ const RequisitionLogin = () => {
           icone: { icone: Astronaut, width: "150px" },
           inputList: [
             ["email", "email"],
-            ["password", "password"],
+            ["password", "password", "password"],
           ],
           formAction: handleSubmit(onSubmit),
           register: register,
