@@ -67,6 +67,7 @@ const ProjectTasksProvider = ({ children }) => {
         },
       })
       .then((resp) => {
+        console.log(resp.data);
         setMyTasks(
           resp.data.filter((task) => {
             if (task.participants.includes(Number(idUser))) {
@@ -117,6 +118,7 @@ const ProjectTasksProvider = ({ children }) => {
         usedProject,
         tasksProject,
         myTasks,
+        setTasksProject,
         actulyProject,
         setUsedProject,
         getMyProjects,

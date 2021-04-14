@@ -48,8 +48,17 @@ const Timer = ({ play_timer, initial_time, count_time }) => {
   return (
     <Container>
       <p>
-        {parseInt((timer / (1000 * 60 * 60)) % 60)} :{" "}
-        {parseInt((timer / (1000 * 60)) % 60)} : {parseInt((timer / 1000) % 60)}
+        {parseInt((timer / (1000 * 60 * 60)) % 60) < 10
+          ? `0${parseInt((timer / (1000 * 60 * 60)) % 60)}`
+          : parseInt((timer / (1000 * 60 * 60)) % 60)}{" "}
+        :{" "}
+        {parseInt((timer / (1000 * 60)) % 60) < 10
+          ? `0${parseInt((timer / (1000 * 60)) % 60)}`
+          : parseInt((timer / (1000 * 60)) % 60)}{" "}
+        :{" "}
+        {parseInt((timer / 1000) % 60) < 10
+          ? `0${parseInt((timer / 1000) % 60)} `
+          : parseInt((timer / 1000) % 60)}
       </p>
 
       <ButtonPlayPause onClick={play ? handlePause : handlePlay} play={play} />
