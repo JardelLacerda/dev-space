@@ -24,12 +24,14 @@ const HomePage = () => {
     myProjects,
     projectParticipants,
     myTasks,
-    getProjects,
+    getMyProjects,
+    getProjectParticipant,
     getTasks,
   } = useContext(ProjectTaks);
 
   useEffect(() => {
-    getProjects(id);
+    getMyProjects(id);
+    getProjectParticipant(id);
     getTasks(undefined, id);
   }, []);
 

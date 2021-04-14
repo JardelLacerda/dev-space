@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react";
-import initialData from "./initial-data";
 import Column from "../Column";
 import { DragDropContext } from "react-beautiful-dnd";
 import { Container } from "./style";
 
 import { useContext } from "react";
-import { LoginContext } from "../../providers/login";
 import { ProjectTaks } from "../../providers/project-tasks";
 import { useParams } from "react-router";
 
 const Board = () => {
-  const { token } = useContext(LoginContext);
   const {
-    loadProject,
     usedProject,
     tasksProject,
-    loadTask,
-    getTasks,
-    getProjects,
+    getTasksProject,
+    getUsedProject,
+    setUsedProject,
+    actulyProject,
   } = useContext(ProjectTaks);
 
-  //const { columnsOrder, columns } = usedProject;
+  const [loadProject, setLoadProject] = useState(true);
 
   const { id } = useParams();
-  const [data, setData] = useState(initialData);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -39,8 +35,8 @@ const Board = () => {
       return;
     }
 
-    const start = data.columns[source.droppableId];
-    const finish = data.columns[destination.droppableId];
+    const start = usedProject.columns[source.droppableId];
+    const finish = usedProject.columns[destination.droppableId];
 
     // console.log(start);
 
@@ -55,11 +51,11 @@ const Board = () => {
       };
 
       const newState = {
-        ...data,
-        columns: { ...data.columns, [newColumn.id]: newColumn },
+        ...usedProject,
+        columns: { ...usedProject.columns, [newColumn.id]: newColumn },
       };
-
-      setData(newState);
+      actulyProject(newState, id);
+      setUsedProject(newState);
       return;
     }
 
@@ -78,55 +74,48 @@ const Board = () => {
     };
 
     const newState = {
-      ...data,
+      ...usedProject,
       columns: {
-        ...data.columns,
+        ...usedProject.columns,
         [newStart.id]: newStart,
         [newFinish.id]: newFinish,
       },
     };
-    setData(newState);
+    actulyProject(newState, id);
+    setUsedProject(newState);
+  };
+
+  const loadedProject = async () => {
+    await Promise.all([getUsedProject(id), getTasksProject(id)]);
+    setLoadProject(false);
   };
 
   useEffect(() => {
-    getTasks(id, undefined);
-    getProjects(id);
+    loadedProject();
   }, []);
-
-  //console.log(usedProject);
-  //console.log(tasksProject);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
-        {loadProject &&
-          loadTask &&
+        {loadProject ? (
+          <p>CARREGANDO</p>
+        ) : (
           usedProject.columnsOrder.map((columnId) => {
             const column = usedProject.columns[columnId];
             const tasks = column?.taskIds.map((taskId) => {
-              const taskTest = tasksProject?.find((task) => task.id === taskId);
+              const taskTest = tasksProject?.find(
+                (task) => toString(task.id) === toString(taskId)
+              );
 
               return taskTest;
             });
-            //console.log(column.id, column, tasks);
 
             return <Column key={column.id} column={column} tasks={tasks} />;
-          })}
+          })
+        )}
       </Container>
     </DragDropContext>
   );
 };
 
 export default Board;
-
-/*
-{loadProject &&
-          usedProject.columnsOrder.map((columnId) => {
-            const column = usedProject.columns[columnId];
-            const tasks = column.taskIds.map((taskId) =>
-              tasksProject?.find((task) => task.id === taskId)
-            );
-            return <Column key={} column={column} tasks={tasks} />;
-          })}
-
- */
