@@ -45,7 +45,7 @@ to use global -
 
 */
 
-import { ContainerForm, IconForm, Input, Button } from "./style";
+import { ContainerForm, IconForm, Input, Button, ErrorMessage } from "./style";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
@@ -72,16 +72,13 @@ const Form = ({ instructions }) => {
         return (
           <>
             <Input
+              error
               key={index}
               name={input[0]}
               placeholder={input[1]}
               {...register(input[0])}
             />
-            {errors && (
-              <p style={{ color: "red", fontSize: "10px" }}>
-                {errors[input[0]]?.message}
-              </p>
-            )}
+            {errors && <ErrorMessage>{errors[input[0]]?.message}</ErrorMessage>}
           </>
         );
       })}
