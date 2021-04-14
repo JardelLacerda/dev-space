@@ -1,4 +1,3 @@
-import Button from "../../components/Buttons";
 import Header from "../../components/Header";
 import {
   Division,
@@ -15,7 +14,6 @@ import { ThemeContext } from "../../providers/theme";
 
 import { ProjectTaks } from "../../providers/project-tasks";
 import RequisitionNewProject from "../../servers/createProject";
-import StandardModal from "../../components/Modal";
 import { useHistory, useParams } from "react-router-dom";
 
 const HomePage = () => {

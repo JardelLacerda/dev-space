@@ -1,4 +1,3 @@
-import StandardModal from "../../components/Modal";
 import {
   Container,
   ContainerButtons,
@@ -13,6 +12,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
 import { LoginContext } from "../../providers/login";
 import RequisitionLogin from "../../servers/login";
+import RequisitionRegister from "../../servers/register";
 
 const LaddingPage = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
@@ -38,7 +38,7 @@ const LaddingPage = () => {
             pareci latim.
           </Description>
           <ContainerButtons>
-            <StandardModal buttonTxtOpen="Register"></StandardModal>
+            <RequisitionRegister />
             <RequisitionLogin />
           </ContainerButtons>
         </ContainerInfo>
