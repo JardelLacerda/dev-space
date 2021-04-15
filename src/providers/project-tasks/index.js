@@ -5,7 +5,7 @@ import axios from "axios";
 export const ProjectTaks = createContext({});
 
 const ProjectTasksProvider = ({ children }) => {
-  const { user_id, token } = useContext(LoginContext);
+  const { token } = useContext(LoginContext);
 
   const [myProjects, setMyProjects] = useState([]);
   const [projectParticipants, setProjectParticipants] = useState([]);
