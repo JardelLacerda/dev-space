@@ -135,22 +135,24 @@ export const Image = styled.img`
   position: absolute;
   z-index: 0;
 
-  width: ${(props) => (props.moon ? "400px" : "300px")};
+  width: ${(props) => (props.moon ? "300px" : "300px")};
   height: 200px;
 
   @media (min-width: 500px) {
-    width: ${(props) => (props.moon ? "400px" : "500px")};
+    width: ${(props) => (props.moon ? "600px" : "500px")};
     height: 400px;
   }
 
   @media (min-width: 700px) {
+    width: ${(props) => (props.moon ? "500px" : "500px")};
+    height: ${(props) => (props.moon ? "400px" : "500px")};
+
     width: 600px;
-    height: 500px;
   }
 
   @media (min-width: 1000px) {
-    width: ${(props) => (props.moon ? "400px" : "470px")};
-    height: 440px;
+    width: ${(props) => (props.moon ? "480px" : "470px")};
+    height: ${(props) => (props.moon ? "350px" : "500px")};
 
     position: relative;
   }

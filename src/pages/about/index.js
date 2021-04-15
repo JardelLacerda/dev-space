@@ -90,7 +90,7 @@ const About = () => {
             </SubTitle>
           </MainDetails>
 
-          <Image src={Moon3} />
+          <Image moon src={Moon3} />
         </MainDetailsContainer>
         <SquadDetails />
       </MainContainer>
