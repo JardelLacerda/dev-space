@@ -11,7 +11,7 @@ const Router = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <LaddingPage />
+        <About />
       </Route>
       <Route exact path="/home/:id">
         <HomePage />
@@ -20,7 +20,7 @@ const Router = () => {
         <Project />
       </Route>
       <Route exact path="/about">
-        <About />
+        <LaddingPage />
       </Route>
       <Route exact path="/profile">
         <Profile />

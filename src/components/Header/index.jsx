@@ -14,8 +14,8 @@ import {
   AccountCircle,
   ExitToApp,
   Home,
-  Description,
   Menu,
+  GetApp,
 } from "@material-ui/icons";
 
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -23,11 +23,13 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
 import { useHistory, useParams } from "react-router-dom";
+import { LoginContext } from "../../providers/login";
 
 const Header = () => {
   const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
     ThemeContext
   );
+  const { user_id } = useContext(LoginContext);
 
   const [state, setState] = useState({
     right: false,
@@ -70,7 +72,7 @@ const Header = () => {
           <ListItemText primary="Perfil" />
         </ListItem>
 
-        <ListItem button onClick={() => history.push(`/home/${id}`)}>
+        <ListItem button onClick={() => history.push(`/home/${user_id}`)}>
           <ListItemIcon>
             <Home />
           </ListItemIcon>
@@ -80,10 +82,10 @@ const Header = () => {
 
         <ListItem button onClick={() => history.push("/about")}>
           <ListItemIcon>
-            <Description />
+            <GetApp />
           </ListItemIcon>
 
-          <ListItemText primary="Sobre" />
+          <ListItemText primary="Login" />
         </ListItem>
 
         <ListItem button onClick={() => Logout()}>
@@ -133,7 +135,7 @@ const Header = () => {
               Perfil
             </Button>
             <Button color="inherit" onClick={() => history.push("/about")}>
-              Sobre
+              Login
             </Button>
             <Button color="inherit" onClick={() => Logout()}>
               Sair
