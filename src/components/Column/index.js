@@ -4,10 +4,10 @@ import CreateCard from "../CreateCard";
 import Task from "../Task";
 import { Container, Title, TaskList } from "./style";
 
-const Column = ({ column, tasks }) => {
-  //console.log("TASKS DAS COLUNAS", tasks, column);
+const Column = ({ column, tasks, test }) => {
+  //console.log(test);
   return (
-    <Container>
+    <Container key={test}>
       <Title>{column.title}</Title>
       <Droppable droppableId={column.id}>
         {(provided, snapshot) => {
@@ -18,7 +18,7 @@ const Column = ({ column, tasks }) => {
               isDraggingOver={snapshot.isDraggingOver}
             >
               {tasks.map((task, index) => (
-                <Task key={task.id} task={task} index={index} />
+                <Task test={task.id} task={task} index={index} />
               ))}
               {provided.placeholder}
             </TaskList>

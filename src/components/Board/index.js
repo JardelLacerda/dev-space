@@ -84,6 +84,7 @@ const Board = () => {
     setUsedProject(newState);
   };
 
+  usedProject["tasks"] = tasksProject;
   const loadedProject = async () => {
     await Promise.all([getUsedProject(id), getTasksProject(id)]);
     setLoadProject(false);

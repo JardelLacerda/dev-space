@@ -3,8 +3,10 @@ import Timer from "../Timer";
 import { Container } from "./style";
 import { Chip } from "@material-ui/core";
 import ListAvatar from "../ListAvatar";
+import DelTask from "../deleteTask";
 
 const Task = ({ task, index }) => {
+  console.log(task.id);
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => {
@@ -16,6 +18,7 @@ const Task = ({ task, index }) => {
             isDragging={snapshot.isDragging}
           >
             <div className="header_task">
+              <DelTask taskId={task.id} />
               <ListAvatar participants={task.participants} />
 
               <Timer
@@ -25,7 +28,7 @@ const Task = ({ task, index }) => {
               />
             </div>
 
-            <h3>{task.title}</h3>
+            <h3>{task.title} </h3>
           </Container>
         );
       }}
