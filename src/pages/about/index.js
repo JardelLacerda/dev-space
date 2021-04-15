@@ -14,14 +14,18 @@ import {
 } from "./style";
 
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import { ThemeContext } from "../../providers/theme";
 
 import Astronaut2 from "../../images/astronaut2.jpeg";
 import Moon from "../../images/moon.jpg";
 import Moon3 from "../../images/moon3.jpg";
+import CardUsers from "../../components/CardUsers";
 
 const About = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
+  const history = useHistory();
 
   return (
     <Container theme={theme ? ThemeDark : ThemeLigth}>
@@ -37,7 +41,10 @@ const About = () => {
               Venha conhecer a ferramenta que irá {""}
               <span>simplificar</span> sua vida.
             </SubTitle>
-            <Buttons nameBtn="COMO ASSIM ?" />
+            <Buttons
+              onClick={() => history.push("/about")}
+              nameBtn="COMO ASSIM ?"
+            />
           </Presentation>
         </PresentationContainer>
 
@@ -92,7 +99,7 @@ const About = () => {
 
           <Image moon src={Moon3} />
         </MainDetailsContainer>
-        <SquadDetails />
+        <SquadDetails></SquadDetails>
       </MainContainer>
     </Container>
   );
