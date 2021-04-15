@@ -4,13 +4,14 @@ import EarthAstronaut from "../../images/earthAndAstronaut.jpg";
 import Colors from "../../global/Theme";
 
 export const Container = styled.section`
-  width: 100vw;
+  width: 98.8vw;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.PrimaryTheme};
+  /* overflow-x: hidden; */
 `;
 
 export const MainContainer = styled.main`
-  width: 100%;
+  width: 99vw;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
@@ -28,7 +29,8 @@ export const MainContainer = styled.main`
 `;
 
 export const PresentationContainer = styled.section`
-  width: 100vw;
+  width: 99vw;
+
   height: 600px;
   /* border: 2px solid red; */
   background-repeat: no-repeat;
@@ -103,7 +105,8 @@ export const SubTitle = styled.h4`
 `;
 
 export const MainDetailsContainer = styled.section`
-  width: 100vw;
+  width: 99vw;
+
   height: 600px;
   background-color: ${(props) => props.bgcolor};
 
@@ -135,30 +138,33 @@ export const Image = styled.img`
   position: absolute;
   z-index: 0;
 
-  width: ${(props) => (props.moon ? "400px" : "300px")};
+  width: ${(props) => (props.moon ? "300px" : "300px")};
   height: 200px;
 
   @media (min-width: 500px) {
-    width: ${(props) => (props.moon ? "400px" : "500px")};
+    width: ${(props) => (props.moon ? "600px" : "500px")};
     height: 400px;
   }
 
   @media (min-width: 700px) {
+    width: ${(props) => (props.moon ? "500px" : "500px")};
+    height: ${(props) => (props.moon ? "400px" : "500px")};
+
     width: 600px;
-    height: 500px;
   }
 
   @media (min-width: 1000px) {
-    width: ${(props) => (props.moon ? "400px" : "470px")};
-    height: 440px;
+    width: ${(props) => (props.moon ? "480px" : "480px")};
+    height: ${(props) => (props.moon ? "350px" : "440px")};
 
     position: relative;
   }
 `;
 
 export const SquadDetails = styled.section`
-  width: 100vw;
+  width: 99vw;
+
   height: 650px;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   background-color: palegreen;
 `;
