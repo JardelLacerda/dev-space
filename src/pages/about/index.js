@@ -19,6 +19,7 @@ import { ThemeContext } from "../../providers/theme";
 import Astronaut2 from "../../images/astronaut2.jpeg";
 import Moon from "../../images/moon.jpg";
 import Moon3 from "../../images/moon3.jpg";
+import CardUsers from "../../components/CardUsers";
 
 const About = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
@@ -92,7 +93,7 @@ const About = () => {
 
           <Image moon src={Moon3} />
         </MainDetailsContainer>
-        <SquadDetails />
+        <SquadDetails></SquadDetails>
       </MainContainer>
     </Container>
   );

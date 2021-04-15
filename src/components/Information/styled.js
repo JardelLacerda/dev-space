@@ -109,7 +109,15 @@ export const ContainerParticipants = styled.section`
   background-color: white;
   border: solid 4px #c4c4c4;
   border-radius: 10px;
+
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  @media (min-width: 700px) {
+    flex-direction: row;
+  }
 `;
 
 export const UserCard = styled.div`
