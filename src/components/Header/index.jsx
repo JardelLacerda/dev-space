@@ -29,7 +29,7 @@ const Header = () => {
   const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
     ThemeContext
   );
-  const { user_id } = useContext(LoginContext);
+  const { user_id, token } = useContext(LoginContext);
 
   const [state, setState] = useState({
     right: false,
@@ -128,9 +128,14 @@ const Header = () => {
             <Button color="inherit" onClick={toggleTheme}>
               Theme Mode
             </Button>
-            <Button color="inherit" onClick={() => history.push(`/home/${id}`)}>
-              Home
-            </Button>
+            {token && (
+              <Button
+                color="inherit"
+                onClick={() => history.push(`/home/${id}`)}
+              >
+                Home
+              </Button>
+            )}
             <Button color="inherit" onClick={() => history.push("/profile")}>
               Perfil
             </Button>
