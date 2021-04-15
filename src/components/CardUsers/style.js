@@ -38,7 +38,6 @@ export const AvatarStyled = styled(Avatar)`
 `;
 
 export const Name = styled.p`
-  border: 1px solid;
   width: 80%;
   height: 30px;
   text-align: center;

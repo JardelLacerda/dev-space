@@ -93,9 +93,7 @@ const About = () => {
 
           <Image moon src={Moon3} />
         </MainDetailsContainer>
-        <SquadDetails>
-          <CardUsers srcImg={Moon}>Matheus</CardUsers>
-        </SquadDetails>
+        <SquadDetails></SquadDetails>
       </MainContainer>
     </Container>
   );
