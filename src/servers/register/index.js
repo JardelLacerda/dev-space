@@ -29,6 +29,14 @@ const RequisitionRegister = () => {
   });
 
   const onSubmit = (data) => {
+    delete data.passwordConfirm;
+
+    data["image"] =
+      "https://aspire.rit.edu/sites/default/files/styles/image_large_thumbnail/public/default_images/profile-picture-default.png?itok=g_gy_X5Q";
+    data["bio"] = "Description";
+    data["hard_skills"] = [];
+    data["links"] = [];
+    data["darkMode"] = "true";
     axios
       .post("https://dev-space-json-server.herokuapp.com/register", data, {
         headers: {
