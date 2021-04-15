@@ -22,6 +22,8 @@ import IconGitHub from "../../images/icons/gitHub.png";
 import IconFigma from "../../images/icons/figma.png";
 import IconUser from "../../images/icons/user.png";
 
+import CardUsers from "../CardUsers";
+
 const Information = () => {
   const { id } = useParams();
   const [loadedInfos, setLoadedInfos] = useState(true);
@@ -153,7 +155,7 @@ const Information = () => {
 
         <ContainerParticipants>
           {participants.map((part, index) => {
-            return <UserCard key={index}>{part}</UserCard>;
+            return <CardUsers key={index}>{part}</CardUsers>;
           })}
         </ContainerParticipants>
       </MainContainer>
