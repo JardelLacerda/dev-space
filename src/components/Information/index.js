@@ -7,7 +7,6 @@ import {
   ButtonsCard,
   CardPadrao,
   Container,
-  ContainerParticipants,
   ContentCard,
   IconLink,
   LocationCardsInfo,
@@ -16,12 +15,12 @@ import {
   RemoveItem,
   SubTitle,
   Title,
-  UserCard,
 } from "./styled";
 
 import BackspaceIcon from "@material-ui/icons/Backspace";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
+import CreateIcon from "@material-ui/icons/Create";
 
 import IconGitlab from "../../images/icons/gitLab.png";
 import IconGitHub from "../../images/icons/gitHub.png";
@@ -29,7 +28,6 @@ import IconFigma from "../../images/icons/figma.png";
 import axios from "axios";
 import CreateTecnology from "../CreateTecnology";
 import CreateRepository from "../CreateRepository";
-import CardUsers from "../CardUsers";
 
 const Information = () => {
   const { id } = useParams();
@@ -64,11 +62,6 @@ const Information = () => {
     ];
 
     return CorlorsCard[Math.floor(Math.random() * 10)];
-  };
-
-  const loadedProject = async () => {
-    await getUsedProject(id);
-    setLoadedInfos(false);
   };
 
   const DeleteTecnology = async (tec) => {
@@ -120,6 +113,11 @@ const Information = () => {
       .catch((err) => console.log(err));
   };
 
+  const loadedProject = async () => {
+    await getUsedProject(id);
+    setLoadedInfos(false);
+  };
+
   useEffect(() => {
     loadedProject();
   }, []);
@@ -129,11 +127,13 @@ const Information = () => {
   ) : (
     <Container theme={theme ? ThemeDark : ThemeLigth}>
       <MainContainer>
-        <Title>{title}</Title>
-        <SubTitle>Tempo total do projeto: {accumulated_time}</SubTitle>
+        <Title theme={theme ? ThemeDark : ThemeLigth}>{title}</Title>
+        <SubTitle theme={theme ? ThemeDark : ThemeLigth}>
+          Tempo total do projeto: {accumulated_time}
+        </SubTitle>
 
         <LocationCardsInfo>
-          <CardPadrao>
+          <CardPadrao theme={theme ? ThemeDark : ThemeLigth}>
             <h2>
               <span>?</span>Descrição<span>?</span>
             </h2>
@@ -141,11 +141,11 @@ const Information = () => {
               <p>{description}</p>
             </ContentCard>
             <ButtonsCard>
-              <button>EDIT</button>
+              <CreateIcon style={{ cursor: "pointer" }} />
             </ButtonsCard>
           </CardPadrao>
 
-          <CardPadrao>
+          <CardPadrao theme={theme ? ThemeDark : ThemeLigth}>
             <h2>
               <span>{`{`}</span>Tecnologias<span>{`}`}</span>
             </h2>
@@ -182,7 +182,7 @@ const Information = () => {
             </ButtonsCard>
           </CardPadrao>
 
-          <CardPadrao>
+          <CardPadrao theme={theme ? ThemeDark : ThemeLigth}>
             <h2>
               <span>-</span>Links Uteis<span>-</span>
             </h2>
@@ -233,13 +233,3 @@ const Information = () => {
 };
 
 export default Information;
-
-/*
-IDEIA PACIALMENTE EXCLUIDA
-
-<ContainerParticipants>
-          {participants.map((part, index) => {
-            return <CardUsers key={index}>{part}</CardUsers>;
-          })}
-        </ContainerParticipants>
-*/

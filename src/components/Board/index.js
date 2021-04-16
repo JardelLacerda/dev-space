@@ -21,6 +21,15 @@ const Board = () => {
 
   const { id } = useParams();
 
+  /* const newUsedProject = {
+    tasks: tasksProject,
+    columns: usedProject.columns,
+    columnsOrder: usedProject.columnsOrder,
+  };
+
+  console.log(newUsedProject);
+  */
+
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
@@ -94,6 +103,8 @@ const Board = () => {
     loadedProject();
   }, []);
 
+  //console.log(tasksProject);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
@@ -102,11 +113,19 @@ const Board = () => {
         ) : (
           usedProject.columnsOrder.map((columnId) => {
             const column = usedProject.columns[columnId];
-            const tasks = column?.taskIds.map((taskId) =>
-              tasksProject.find(
-                (task) => toString(task.id) === toString(taskId)
-              )
-            );
+            const tasks = column?.taskIds.map((taskId) => {
+              //console.log(taskId);
+              //console.log(tasksProject);
+              console.log(taskId, "IDS DAS TASKS QUE ENTRAM");
+              //console.log(tasksProject, "TASKPROJECTS");
+              let test = tasksProject.find((task) => {
+                console.log(task.id, taskId, "PASSANDO PELO FIND");
+                return task.id === taskId;
+              });
+              console.log(test, "FIND TERMINADO");
+              return test;
+            });
+            console.log(tasks);
             return <Column key={column.id} column={column} tasks={tasks} />;
           })
         )}

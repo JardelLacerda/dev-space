@@ -6,7 +6,7 @@ import { useState } from "react";
 import Information from "../../components/Information";
 
 const Project = () => {
-  const [onBoard, setOnBoard] = useState(false);
+  const [onBoard, setOnBoard] = useState(true);
   return (
     <>
       <Header />

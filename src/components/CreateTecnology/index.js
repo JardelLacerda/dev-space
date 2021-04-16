@@ -13,6 +13,7 @@ import * as yup from "yup";
 import AddIcon from "@material-ui/icons/Add";
 
 import axios from "axios";
+import { ButtonForm, Form, InputForm } from "../CreateRepository/styled";
 
 const CreateTecnology = () => {
   const { id } = useParams();
@@ -58,18 +59,18 @@ const CreateTecnology = () => {
 
   return (
     <StandardModal isIcon={true} icon={<AddIcon />}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input name="title" {...register("title")} placeholder="Titulo" />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <InputForm name="title" {...register("title")} placeholder="Titulo" />
         {errors && errors["title"]?.message}
-        <input
+        <InputForm
           name="link"
           {...register("link")}
           placeholder="Link (Opcional)"
         />
         {errors && errors["link"]?.message}
 
-        <button>Criar</button>
-      </form>
+        <ButtonForm>Criar</ButtonForm>
+      </Form>
     </StandardModal>
   );
 };

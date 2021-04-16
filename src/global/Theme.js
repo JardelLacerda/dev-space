@@ -25,7 +25,7 @@ export const ThemeLigth = {
   PrimaryTheme: "#fff",
   SecundaryTheme: "#FEFFD0",
   TextColor: "#000",
-  Details: "#FED400",
+  Details: "#1A1B1D",
   SecundaryColor: "#1A1B1D",
 };
 
