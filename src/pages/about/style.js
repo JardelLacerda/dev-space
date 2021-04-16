@@ -9,7 +9,7 @@ export const Container = styled.section`
   width: 98.8vw;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.PrimaryTheme};
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 `;
 
 export const MainContainer = styled.main`
@@ -82,12 +82,13 @@ export const Title = styled(motion.h2)`
     props.shadowUnable ? "" : "black 0.1em 0.1em 0.2em"};
 
   @media (min-width: 500px) {
-    font-size: 32px;
+    font-size: ${(props) => (props.firstTitle ? "32px" : "24px")};
   }
 `;
 
 export const SubTitle = styled(motion.h4)`
   font-size: 17px;
+  font-weight: ${(props) => (props.firstText ? "" : "300")};
 
   color: ${(props) => (props.color ? props.color : "lightyellow")};
   text-shadow: ${(props) =>
@@ -98,11 +99,7 @@ export const SubTitle = styled(motion.h4)`
   }
 
   @media (min-width: 500px) {
-    font-size: 19px;
-  }
-
-  @media (min-width: 700px) {
-    font-size: 22px;
+    font-size: ${(props) => (props.firstText ? "20px" : "17px")};
   }
 `;
 
@@ -124,8 +121,8 @@ export const MainDetailsContainer = styled(motion.section)`
 export const MainDetails = styled(motion.div)`
   width: 90%;
   z-index: 1;
-
   /* border: 1px solid red; */
+  padding: 20px;
 
   @media (min-width: 500px) {
     width: 85%;
@@ -133,16 +130,14 @@ export const MainDetails = styled(motion.div)`
 
   @media (min-width: 700px) {
     width: 90%;
-    height: 500px;
   }
 
   @media (min-width: 900px) {
-    width: 500px;
+    width: 470px;
   }
 
   @media (min-width: 1000px) {
-    width: 550px;
-    height: 570px;
+    width: 500px;
   }
 `;
 
@@ -154,7 +149,7 @@ export const Image = styled(motion.img)`
   height: ${(props) => (props.moon ? "250px" : "240px")};
 
   @media (min-width: 500px) {
-    width: ${(props) => (props.moon ? "280px" : "500px")};
+    width: ${(props) => (props.moon ? "290px" : "530px")};
     height: 300px;
   }
 
@@ -174,12 +169,4 @@ export const Image = styled(motion.img)`
 
     position: relative;
   }
-`;
-
-export const SquadDetails = styled.section`
-  width: 99vw;
-
-  height: 300px;
-  /* border: 2px solid red; */
-  background-color: #000;
 `;
