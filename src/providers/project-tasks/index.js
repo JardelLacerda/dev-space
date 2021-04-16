@@ -98,6 +98,7 @@ const ProjectTasksProvider = ({ children }) => {
         );
       });
   };
+
   const profileInfo = async (idUser) => {
     await axios
       .get(`https://dev-space-json-server.herokuapp.com/users/${idUser}`, {
@@ -110,6 +111,7 @@ const ProjectTasksProvider = ({ children }) => {
         setUserInfos(resp.data);
       });
   };
+
   const profileEdit = async (idUser, data) => {
     await axios
       .patch(
@@ -125,6 +127,7 @@ const ProjectTasksProvider = ({ children }) => {
         console.log(resp);
       });
   };
+
   const actulyProject = async (data, id) => {
     await axios.patch(
       `https://dev-space-json-server.herokuapp.com/project/${id}`,

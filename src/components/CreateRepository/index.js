@@ -13,6 +13,7 @@ import * as yup from "yup";
 import axios from "axios";
 
 import AddIcon from "@material-ui/icons/Add";
+import { ButtonForm, Form, InputForm } from "./styled";
 
 const CreateRepository = () => {
   const { id } = useParams();
@@ -56,18 +57,18 @@ const CreateRepository = () => {
 
   return (
     <StandardModal isIcon={true} icon={<AddIcon />}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input name="title" {...register("title")} placeholder="Titulo" />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <InputForm name="title" {...register("title")} placeholder="Titulo" />
         {errors && errors["title"]?.message}
-        <input
+        <InputForm
           name="link"
           {...register("link")}
           placeholder="Link (Opcional)"
         />
         {errors && errors["link"]?.message}
 
-        <button>Criar</button>
-      </form>
+        <ButtonForm>Criar</ButtonForm>
+      </Form>
     </StandardModal>
   );
 };
