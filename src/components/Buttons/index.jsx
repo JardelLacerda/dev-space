@@ -4,12 +4,26 @@ Quando ela é colocada no botão fica com as dimensões adequadas na landing pag
 Quando retirada, as dimensões ficam adequadas às outras páginas
 */
 
+/*
+  * <Button/>:
+    - props usadas: nameBtn, icon, onClick, isIcon
+    - quando recebe a props isIcon={true} ele vira um icone, do contrário
+    ele vira um Botão
+    
+    Exemplo:
+      icon={<IconeEscolhido/>}
+*/
+import { Avatar } from "@material-ui/core";
 import { StyledButton } from "./style";
 
-const Button = ({ nameBtn, onClick = null }) => {
+const Button = ({ nameBtn, icon, onClick = null, isIcon = false }) => {
   return (
     <>
-      <StyledButton onClick={onClick}>{nameBtn}</StyledButton>
+      {isIcon ? (
+        <Avatar>{icon}</Avatar>
+      ) : (
+        <StyledButton onClick={onClick}>{nameBtn}</StyledButton>
+      )}
     </>
   );
 };

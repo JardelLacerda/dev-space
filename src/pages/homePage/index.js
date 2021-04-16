@@ -1,3 +1,16 @@
+/**
+ !----------- IMPORTANTE
+  * <RequisitionNewProject/>:
+    Abre um Modal que pode ser mudado para ícone clicável. 
+    Ver a documentação no componente Modal ou Buttons.
+
+    Exemplo:
+            <RequisitionNewProject isIcon={true} />
+
+          O botão se torna um ícone que pode ser clicável
+
+ */
+
 import Header from "../../components/Header";
 import {
   Division,
@@ -43,7 +56,7 @@ const HomePage = () => {
           <LocationTitle>
             <Title theme={theme ? ThemeDark : ThemeLigth}>Meus Projetos</Title>
 
-            <RequisitionNewProject />
+            <RequisitionNewProject isIcon={false} />
           </LocationTitle>
           <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
             {myProjects?.map((pj, index) => {

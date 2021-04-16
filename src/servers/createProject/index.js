@@ -12,7 +12,7 @@ import { LoginContext } from "../../providers/login";
 import axios from "axios";
 import { useHistory } from "react-router";
 
-const RequisitionNewProject = () => {
+const RequisitionNewProject = ({ isIcon }) => {
   const { token, user_id } = useContext(LoginContext);
   const history = useHistory();
 
@@ -108,7 +108,7 @@ const RequisitionNewProject = () => {
   };
 
   return (
-    <StandardModal buttonTxtOpen="Novo Projeto">
+    <StandardModal isIcon={isIcon} buttonTxtOpen="Novo Projeto">
       <Form
         instructions={{
           buttonName: "Criar",
