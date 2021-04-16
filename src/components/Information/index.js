@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ProjectTaks } from "../../providers/project-tasks";
 import { ThemeContext } from "../../providers/theme";
+import { LoginContext } from "../../providers/login";
 import {
   ButtonsCard,
   CardPadrao,
@@ -12,57 +13,41 @@ import {
   LocationCardsInfo,
   MainContainer,
   MiniCardTec,
+  RemoveItem,
   SubTitle,
   Title,
   UserCard,
 } from "./styled";
 
+import BackspaceIcon from "@material-ui/icons/Backspace";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
+
 import IconGitlab from "../../images/icons/gitLab.png";
 import IconGitHub from "../../images/icons/gitHub.png";
 import IconFigma from "../../images/icons/figma.png";
-import IconUser from "../../images/icons/user.png";
-
+import axios from "axios";
+import CreateTecnology from "../CreateTecnology";
+import CreateRepository from "../CreateRepository";
 import CardUsers from "../CardUsers";
 
 const Information = () => {
   const { id } = useParams();
   const [loadedInfos, setLoadedInfos] = useState(true);
-
+  const [delTec, setDelTec] = useState(false);
+  const [delRep, setDelRep] = useState(false);
+  const { token } = useContext(LoginContext);
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
 
   const { getUsedProject, usedProject } = useContext(ProjectTaks);
 
   const {
-    //description,
-    //participants,
-    //repository,
-    //technology,
+    description,
+    repository,
+    technology,
     title,
     accumulated_time,
   } = usedProject;
-
-  const description = "Sou um texto de descrição para testar a descrição ";
-  const technology = [
-    { title: "React", link: null },
-    { title: "CSS3", link: null },
-    { title: "JavaCript", link: null },
-    { title: "Html5", link: null },
-    { title: "Python", link: null },
-  ];
-
-  const participants = [1, 2, 3, 4];
-
-  const repository = [
-    { title: "Gitlab", link: null },
-    { title: "GitHub", link: null },
-    { title: "Miro", link: null },
-    { title: "Figma", link: null },
-  ];
-
-  const loadedProject = async () => {
-    await getUsedProject(id);
-    setLoadedInfos(false);
-  };
 
   const ColorRandon = () => {
     const CorlorsCard = [
@@ -79,6 +64,60 @@ const Information = () => {
     ];
 
     return CorlorsCard[Math.floor(Math.random() * 10)];
+  };
+
+  const loadedProject = async () => {
+    await getUsedProject(id);
+    setLoadedInfos(false);
+  };
+
+  const DeleteTecnology = async (tec) => {
+    let data = usedProject.technology;
+    data = {
+      technology: data.filter((resp) => {
+        return resp.title !== tec.title;
+      }),
+    };
+
+    await axios
+      .patch(
+        `https://dev-space-json-server.herokuapp.com/project/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        getUsedProject(id);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const DeleteRepository = async (rep) => {
+    let data = usedProject.repository;
+    data = {
+      repository: data.filter((resp) => {
+        return resp.title !== rep.title;
+      }),
+    };
+
+    await axios
+      .patch(
+        `https://dev-space-json-server.herokuapp.com/project/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        console.log(resp);
+        getUsedProject(id);
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -115,13 +154,31 @@ const Information = () => {
                 return (
                   <MiniCardTec key={index} coloration={ColorRandon()}>
                     <h4>{tec.title}</h4>
+                    {delTec && (
+                      <RemoveItem>
+                        <HighlightOffIcon
+                          onClick={() => DeleteTecnology(tec)}
+                        />
+                      </RemoveItem>
+                    )}
                   </MiniCardTec>
                 );
               })}
             </ContentCard>
             <ButtonsCard>
-              <button>ADD</button>
-              <button>REMOVE</button>
+              <CreateTecnology />
+
+              {!delTec ? (
+                <BackspaceIcon
+                  onClick={() => setDelTec(!delTec)}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <MenuBookIcon
+                  onClick={() => setDelTec(!delTec)}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
             </ButtonsCard>
           </CardPadrao>
 
@@ -133,6 +190,13 @@ const Information = () => {
               {repository.map((rep, index) => {
                 return (
                   <a className="Icons" key={index}>
+                    {delRep && (
+                      <RemoveItem>
+                        <HighlightOffIcon
+                          onClick={() => DeleteRepository(rep)}
+                        />
+                      </RemoveItem>
+                    )}
                     {rep.title === "Gitlab" ? (
                       <IconLink src={IconGitlab} />
                     ) : rep.title === "GitHub" ? (
@@ -147,20 +211,35 @@ const Information = () => {
               })}
             </ContentCard>
             <ButtonsCard>
-              <button>ADD</button>
-              <button>REMOVE</button>
+              <CreateRepository />
+
+              {!delRep ? (
+                <BackspaceIcon
+                  onClick={() => setDelRep(!delRep)}
+                  style={{ cursor: "pointer" }}
+                />
+              ) : (
+                <MenuBookIcon
+                  onClick={() => setDelRep(!delRep)}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
             </ButtonsCard>
           </CardPadrao>
         </LocationCardsInfo>
-
-        <ContainerParticipants>
-          {participants.map((part, index) => {
-            return <CardUsers key={index}>{part}</CardUsers>;
-          })}
-        </ContainerParticipants>
       </MainContainer>
     </Container>
   );
 };
 
 export default Information;
+
+/*
+IDEIA PACIALMENTE EXCLUIDA
+
+<ContainerParticipants>
+          {participants.map((part, index) => {
+            return <CardUsers key={index}>{part}</CardUsers>;
+          })}
+        </ContainerParticipants>
+*/

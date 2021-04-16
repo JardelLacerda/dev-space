@@ -110,6 +110,8 @@ const ProjectTasksProvider = ({ children }) => {
     );
   };
 
+  /*PAGINA DE INFORMAÇÕES */
+
   return (
     <ProjectTaks.Provider
       value={{

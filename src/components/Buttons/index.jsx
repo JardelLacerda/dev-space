@@ -20,7 +20,9 @@ const Button = ({ nameBtn, icon, onClick = null, isIcon = false }) => {
   return (
     <>
       {isIcon ? (
-        <Avatar>{icon}</Avatar>
+        <Avatar style={{ cursor: "pointer" }} onClick={onClick}>
+          {icon}
+        </Avatar>
       ) : (
         <StyledButton onClick={onClick}>{nameBtn}</StyledButton>
       )}
