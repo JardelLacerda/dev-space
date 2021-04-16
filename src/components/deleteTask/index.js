@@ -11,7 +11,11 @@ const DelTask = ({ taskId }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((resp) => console.log(resp))
+      .then((resp) => {
+        //let data = usedProject
+        //data.columns
+      })
+
       .catch((err) => console.log(err));
   };
   return <button onClick={() => handleClick()}>x</button>;

@@ -14,13 +14,13 @@ export const MainContainer = styled.main`
 `;
 
 export const Title = styled.h2`
-  color: white;
+  color: ${({ theme }) => theme.TextColor};
   margin: 0;
   text-align: center;
 `;
 
 export const SubTitle = styled.h4`
-  color: yellow;
+  color: ${({ theme }) => theme.Details};
   margin: 0;
   text-align: center;
 `;
@@ -28,16 +28,22 @@ export const SubTitle = styled.h4`
 export const LocationCardsInfo = styled.section`
   margin: 30px auto;
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-around;
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+  }
 `;
 
 export const CardPadrao = styled.section`
-  background-color: white;
+  background-color: ${({ theme }) => theme.SecundaryTheme};
   border: solid 3px #c4c4c4;
-  width: 300px;
+  width: 280px;
   height: 350px;
   border-radius: 10px;
+  margin: 20px auto;
 
   h2 {
     color: black;
@@ -102,30 +108,6 @@ export const IconLink = styled.img`
   margin: 0 auto;
   height: 100%;
   cursor: pointer;
-`;
-
-export const ContainerParticipants = styled.section`
-  width: 95%;
-  margin: 0 auto;
-  min-height: 200px;
-  background-color: white;
-  border: solid 4px #c4c4c4;
-  border-radius: 10px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-
-  @media (min-width: 700px) {
-    flex-direction: row;
-  }
-`;
-
-export const UserCard = styled.div`
-  height: 150px;
-  width: 100px;
-  border: solid 4px #c4c4c4;
 `;
 
 export const RemoveItem = styled.div`
