@@ -21,16 +21,22 @@ const LoginProvider = ({ children }) => {
     setToken(token);
   };
 
-  useEffect(() => {
+  const liberyToken = () => {
     let user = window.localStorage.getItem("user_id");
     user && setId(user);
     let token = window.localStorage.getItem("token");
     token && setToken(token);
     Logged();
+  };
+
+  useEffect(() => {
+    liberyToken();
   }, []);
 
   return (
-    <LoginContext.Provider value={{ token, user_id, isLogged, setVaribles }}>
+    <LoginContext.Provider
+      value={{ token, user_id, isLogged, liberyToken, setVaribles }}
+    >
       {children}
     </LoginContext.Provider>
   );
