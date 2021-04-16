@@ -72,6 +72,7 @@ export const ContentCard = styled.div`
     margin: 0 auto;
     display: flex;
     align-items: center;
+    position: relative;
   }
 `;
 
@@ -84,6 +85,7 @@ export const ButtonsCard = styled.div`
 `;
 
 export const MiniCardTec = styled.div`
+  position: relative;
   width: 40%;
   height: 50px;
   background-color: ${({ coloration }) => coloration};
@@ -124,4 +126,14 @@ export const UserCard = styled.div`
   height: 150px;
   width: 100px;
   border: solid 4px #c4c4c4;
+`;
+
+export const RemoveItem = styled.div`
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 5px;
+  right: 5px;
+  color: red;
+  cursor: pointer;
 `;

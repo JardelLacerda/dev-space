@@ -1,15 +1,7 @@
-/*
-  * <Button/>:
-    - props usadas: nameBtn, icon, onClick, isIcon
-    - quando recebe a props isIcon={true} ele vira um icone, do contrário
-    ele vira um Botão
-    
-    Exemplo:
-      icon={<IconeEscolhido/>}
-*/
-
 import { makeStyles } from "@material-ui/core/styles";
-import { Fade, Modal, Backdrop } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
 import { useState } from "react";
 import Button from "../Buttons";
 import { Paper } from "./style";
@@ -22,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StandardModal = ({ buttonTxtOpen, children, icon, isIcon }) => {
+const StandardModal = ({ buttonTxtOpen, children }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -35,12 +27,7 @@ const StandardModal = ({ buttonTxtOpen, children, icon, isIcon }) => {
 
   return (
     <div>
-      <Button
-        icon={icon}
-        nameBtn={buttonTxtOpen}
-        isIcon={isIcon}
-        onClick={handleOpen}
-      />
+      <Button onClick={handleOpen} nameBtn={buttonTxtOpen} />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
