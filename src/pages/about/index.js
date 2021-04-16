@@ -11,6 +11,7 @@ import {
   Title,
   SubTitle,
   Image,
+  MyComponent,
 } from "./style";
 
 import { useContext } from "react";
@@ -19,20 +20,31 @@ import { useHistory } from "react-router-dom";
 import { ThemeContext } from "../../providers/theme";
 
 import Astronaut2 from "../../images/astronaut2.jpeg";
-import Moon from "../../images/moon.jpg";
-import Moon3 from "../../images/moon3.jpg";
+import Moon from "../../images/moon-removebg.png";
+import Earth from "../../images/earth.png";
+
 import CardUsers from "../../components/CardUsers";
 
 const About = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
   const history = useHistory();
 
+  const fadeLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
     <Container theme={theme ? ThemeDark : ThemeLigth}>
       <Header />
       <MainContainer>
         <PresentationContainer>
-          <Presentation>
+          <Presentation
+            variants={fadeLeft}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 1 }}
+          >
             <Title color="yellow">
               Dev, você está pronto para embarcar no próximo estágio de
               produtividade?
@@ -49,30 +61,39 @@ const About = () => {
         </PresentationContainer>
 
         <MainDetailsContainer bgcolor="#000">
-          <Image src={Astronaut2} />
+          <Image
+            moon
+            src={Moon}
+            animate={{ rotate: 360 }}
+            transition={{ ease: "linear", duration: 100, repeat: Infinity }}
+          />
 
           <MainDetails>
-            <Title color="lightblue">AUTONOMIA</Title>
-            <SubTitle>
+            <Title shadowUnable color="lightblue">
+              AUTONOMIA
+            </Title>
+            <SubTitle color="white" shadowUnable>
               Sabe quando você se sente preso àquela nova ferramenta de
               organização de projetos e precisa de muito tempo de adaptação até
               começar a codar?
             </SubTitle>
-            <SubTitle>
+            <SubTitle color="white" shadowUnable>
               Com DevSpace você volta a ser dono do seu próprio espaço de
               trabalho.
             </SubTitle>
 
-            <Title color="lightblue">PRATICIDADE</Title>
+            <Title shadowUnable color="lightblue">
+              PRATICIDADE
+            </Title>
 
-            <SubTitle>
+            <SubTitle color="white" shadowUnable>
               Não precisa se preocupar com inúmeras configurações iniciais para
               iniciar um simples projeto.
             </SubTitle>
           </MainDetails>
         </MainDetailsContainer>
 
-        <MainDetailsContainer bgcolor="#2A2B2D">
+        <MainDetailsContainer>
           <MainDetails>
             <Title shadowUnable color="#ff6060">
               PRODUTIVIDADE
@@ -97,7 +118,11 @@ const About = () => {
             </SubTitle>
           </MainDetails>
 
-          <Image moon src={Moon3} />
+          <Image
+            src={Earth}
+            animate={{ rotate: 360 }}
+            transition={{ ease: "linear", duration: 100, repeat: Infinity }}
+          />
         </MainDetailsContainer>
         <SquadDetails></SquadDetails>
       </MainContainer>
