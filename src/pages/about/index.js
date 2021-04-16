@@ -7,11 +7,9 @@ import {
   MainContainer,
   MainDetailsContainer,
   MainDetails,
-  SquadDetails,
   Title,
   SubTitle,
   Image,
-  MyComponent,
 } from "./style";
 
 import { useContext } from "react";
@@ -24,6 +22,7 @@ import Moon from "../../images/moon-removebg.png";
 import Earth from "../../images/earth.png";
 
 import CardUsers from "../../components/CardUsers";
+import Footer from "../../components/Footer";
 
 const About = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
@@ -45,11 +44,11 @@ const About = () => {
             animate="visible"
             transition={{ duration: 1 }}
           >
-            <Title color="yellow">
+            <Title firstTitle color="yellow">
               Dev, você está pronto para embarcar no próximo estágio de
               produtividade?
             </Title>
-            <SubTitle>
+            <SubTitle firstText>
               Venha conhecer a ferramenta que irá {""}
               <span>simplificar</span> sua vida.
             </SubTitle>
@@ -124,7 +123,7 @@ const About = () => {
             transition={{ ease: "linear", duration: 100, repeat: Infinity }}
           />
         </MainDetailsContainer>
-        <SquadDetails></SquadDetails>
+        <Footer></Footer>
       </MainContainer>
     </Container>
   );
