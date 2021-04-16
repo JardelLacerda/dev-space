@@ -56,14 +56,6 @@ const Header = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button onClick={toggleTheme}>
-          <ListItemIcon>
-            <Brightness4Icon onClick={toggleTheme} />
-          </ListItemIcon>
-
-          <ListItemText primary="Theme Mode" />
-        </ListItem>
-
         <ListItem button onClick={() => history.push("/profile")}>
           <ListItemIcon>
             <AccountCircle />
@@ -125,9 +117,6 @@ const Header = () => {
             </div>
           ))}
           <div className="tempDesktop">
-            <Button color="inherit" onClick={toggleTheme}>
-              Theme Mode
-            </Button>
             {token && (
               <Button
                 color="inherit"
