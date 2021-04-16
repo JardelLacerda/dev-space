@@ -14,8 +14,8 @@ import {
   Div,
 } from "./style";
 import { ThemeContext } from "../../providers/theme";
-
 import { ProjectTaks } from "../../providers/project-tasks";
+import { storage } from "../../components/firebase";
 
 const Profile = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
@@ -33,9 +33,13 @@ const Profile = () => {
     profileEdit,
     userInfos,
   } = useContext(ProjectTaks);
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [userName, setUserName] = useState("");
   const [userBio, setUserBio] = useState("");
   const [userHardSkill, setUserHardSkills] = useState("Java");
+  console.log(storage);
   const [load, setLoad] = useState(false);
   const handleSubmit = (infoChange) => {
     let data = {};
@@ -50,6 +54,47 @@ const Profile = () => {
     setLoad(!load);
     console.log(data);
   };
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            setUrl(url);
+          });
+        console.log(url);
+      }
+    );
+  };
+  useEffect(() => {
+    if (url) {
+      let data = {};
+      data.image = url;
+      profileEdit(user_id, data);
+      setInterval(function () {
+        setLoad(!load);
+      }, 2000);
+    }
+  }, [url]);
   useEffect(() => {
     console.log("Ola");
     if (user_id !== undefined) {
@@ -77,7 +122,7 @@ const Profile = () => {
             Informações do Usuário
           </Config>
           <UserInfo theme={theme ? ThemeDark : ThemeLigth}>
-            <img src={userInfos.image} alt="User Img" />
+            {userInfos.image && <img src={userInfos.image} alt="User Img" />}
             <div>
               <span>Nome </span>
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
@@ -113,8 +158,9 @@ const Profile = () => {
             Imagem do Perfil
           </Config>
           <ProfileImage theme={theme ? ThemeDark : ThemeLigth}>
-            <img src={userInfos.image} alt="User Img" />
-            <button>Add Imagem de Perfil</button>
+            {userInfos.image && <img src={userInfos.image} alt="User Img" />}
+            <input type="file" onChange={handleChange} />
+            <button onClick={handleUpload}>Upload</button>
           </ProfileImage>
           <Config theme={theme ? ThemeDark : ThemeLigth}>
             Configurações do Perfil
