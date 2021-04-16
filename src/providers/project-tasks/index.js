@@ -1,16 +1,17 @@
 import { createContext, useContext, useState } from "react";
 import { LoginContext } from "../login";
+
 import axios from "axios";
 
 export const ProjectTaks = createContext({});
 
 const ProjectTasksProvider = ({ children }) => {
-  const { token } = useContext(LoginContext);
+  const { token, user_id } = useContext(LoginContext);
 
   const [myProjects, setMyProjects] = useState([]);
   const [projectParticipants, setProjectParticipants] = useState([]);
   const [usedProject, setUsedProject] = useState({});
-
+  const [userInfos, setUserInfos] = useState({});
   const [tasksProject, setTasksProject] = useState([]);
   const [myTasks, setMyTasks] = useState([]);
 
@@ -97,7 +98,33 @@ const ProjectTasksProvider = ({ children }) => {
         );
       });
   };
-
+  const profileInfo = async (idUser) => {
+    await axios
+      .get(`https://dev-space-json-server.herokuapp.com/users/${idUser}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => {
+        console.log(resp);
+        setUserInfos(resp.data);
+      });
+  };
+  const profileEdit = async (idUser, data) => {
+    await axios
+      .patch(
+        `https://dev-space-json-server.herokuapp.com/users/${idUser}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        console.log(resp);
+      });
+  };
   const actulyProject = async (data, id) => {
     await axios.patch(
       `https://dev-space-json-server.herokuapp.com/project/${id}`,
@@ -120,6 +147,7 @@ const ProjectTasksProvider = ({ children }) => {
         usedProject,
         tasksProject,
         myTasks,
+        userInfos,
         setTasksProject,
         actulyProject,
         setUsedProject,
@@ -128,6 +156,8 @@ const ProjectTasksProvider = ({ children }) => {
         getProjectParticipant,
         getTasksProject,
         getTasks,
+        profileInfo,
+        profileEdit,
       }}
     >
       {children}
