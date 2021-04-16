@@ -9,7 +9,7 @@ export const Container = styled.section`
 
 export const ContainerMain = styled.main`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: ${({ theme }) => theme.PrimaryTheme};
   display: flex;
   flex-direction: column;

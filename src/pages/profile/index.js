@@ -15,7 +15,7 @@ import {
 } from "./style";
 import { ThemeContext } from "../../providers/theme";
 import { ProjectTaks } from "../../providers/project-tasks";
-import { storage } from "../../components/firebase";
+import { storage } from "../../servers/firebase";
 
 const Profile = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
