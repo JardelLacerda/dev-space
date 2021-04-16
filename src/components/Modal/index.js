@@ -14,8 +14,6 @@ import { useState } from "react";
 import Button from "../Buttons";
 import { Paper } from "./style";
 
-import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
-
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",

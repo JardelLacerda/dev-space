@@ -3,6 +3,8 @@ import EarthView from "../../images/nasaEarthView.jpg";
 import EarthAstronaut from "../../images/earthAndAstronaut.jpg";
 import Colors from "../../global/Theme";
 
+import { motion } from "framer-motion";
+
 export const Container = styled.section`
   width: 98.8vw;
   min-height: 100vh;
@@ -11,7 +13,7 @@ export const Container = styled.section`
 `;
 
 export const MainContainer = styled.main`
-  width: 99vw;
+  width: 100%;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
@@ -29,7 +31,7 @@ export const MainContainer = styled.main`
 `;
 
 export const PresentationContainer = styled.section`
-  width: 99vw;
+  width: 100%;
 
   height: 600px;
   /* border: 2px solid red; */
@@ -51,10 +53,10 @@ export const PresentationContainer = styled.section`
   }
 `;
 
-export const Presentation = styled.div`
+export const Presentation = styled(motion.div)`
   margin: 0 10px 0;
   opacity: 1;
-  width: 80%;
+  width: 100%;
   text-align: center;
   height: 500px;
   /* border: 1px solid red; */
@@ -73,9 +75,9 @@ export const Presentation = styled.div`
   }
 `;
 
-export const Title = styled.h2`
+export const Title = styled(motion.h2)`
   font-size: 22px;
-  color: ${(props) => props.color};
+  color: ${Colors.BasicYellow};
   text-shadow: ${(props) =>
     props.shadowUnable ? "" : "black 0.1em 0.1em 0.2em"};
 
@@ -84,10 +86,10 @@ export const Title = styled.h2`
   }
 `;
 
-export const SubTitle = styled.h4`
+export const SubTitle = styled(motion.h4)`
   font-size: 17px;
 
-  color: lightyellow;
+  color: ${(props) => (props.color ? props.color : "lightyellow")};
   text-shadow: ${(props) =>
     props.shadowUnable ? "" : "black 0.1em 0.1em 0.2em"};
 
@@ -104,58 +106,71 @@ export const SubTitle = styled.h4`
   }
 `;
 
-export const MainDetailsContainer = styled.section`
+export const MainDetailsContainer = styled(motion.section)`
   width: 99vw;
 
-  height: 600px;
   background-color: ${(props) => props.bgcolor};
 
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+  }
 `;
 
-export const MainDetails = styled.div`
-  position: relative;
-  width: 300px;
+export const MainDetails = styled(motion.div)`
+  width: 90%;
   z-index: 1;
 
+  /* border: 1px solid red; */
+
   @media (min-width: 500px) {
-    width: 400px;
+    width: 85%;
   }
 
   @media (min-width: 700px) {
-    width: 600px;
+    width: 90%;
     height: 500px;
   }
-  @media (min-width: 1000px) {
+
+  @media (min-width: 900px) {
     width: 500px;
+  }
+
+  @media (min-width: 1000px) {
+    width: 550px;
     height: 570px;
   }
 `;
 
-export const Image = styled.img`
-  position: absolute;
-  z-index: 0;
+export const Image = styled(motion.img)`
+  /* position: absolute; */
+  /* z-index: 0; */
 
-  width: ${(props) => (props.moon ? "300px" : "300px")};
-  height: 200px;
+  width: ${(props) => (props.moon ? "250px" : "420px")};
+  height: ${(props) => (props.moon ? "250px" : "240px")};
 
   @media (min-width: 500px) {
-    width: ${(props) => (props.moon ? "600px" : "500px")};
-    height: 400px;
+    width: ${(props) => (props.moon ? "280px" : "500px")};
+    height: 300px;
   }
 
   @media (min-width: 700px) {
-    width: ${(props) => (props.moon ? "500px" : "500px")};
-    height: ${(props) => (props.moon ? "400px" : "500px")};
+    width: ${(props) => (props.moon ? "280px" : "480px")};
+    height: ${(props) => (props.moon ? "280px" : "270px")};
+  }
 
-    width: 600px;
+  @media (min-width: 900px) {
+    width: ${(props) => (props.moon ? "300px" : "440px")};
+    height: ${(props) => (props.moon ? "300px" : "240px")};
   }
 
   @media (min-width: 1000px) {
-    width: ${(props) => (props.moon ? "480px" : "480px")};
-    height: ${(props) => (props.moon ? "350px" : "440px")};
+    width: ${(props) => (props.moon ? "300px" : "460px")};
+    height: ${(props) => (props.moon ? "300px" : "260px")};
 
     position: relative;
   }
@@ -164,7 +179,7 @@ export const Image = styled.img`
 export const SquadDetails = styled.section`
   width: 99vw;
 
-  height: 650px;
+  height: 300px;
   /* border: 2px solid red; */
-  background-color: palegreen;
+  background-color: #000;
 `;
