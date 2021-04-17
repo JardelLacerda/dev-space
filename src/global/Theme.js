@@ -7,6 +7,8 @@ const Colors = {
 
 export const ThemeDark = {
   PrimaryTheme: "#000",
+  PrimaryThemeForm: "#1a1b1d",
+
   SecundaryTheme: "#FFF",
   TextColor: "#fff",
   Details: "#FED400",
