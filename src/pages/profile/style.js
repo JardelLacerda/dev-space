@@ -77,7 +77,7 @@ export const PersonalInfo = styled.div`
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 
   input {
     border: none;
