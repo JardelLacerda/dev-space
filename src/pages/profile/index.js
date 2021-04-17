@@ -55,7 +55,7 @@ const Profile = () => {
   const [progress, setProgress] = useState(0);
   const [userName, setUserName] = useState("");
   const [userBio, setUserBio] = useState("");
-  const [userHardSkill, setUserHardSkills] = useState("Java");
+  const [userHardSkill, setUserHardSkills] = useState("Minha hard skill");
 
   console.log(storage);
 
@@ -126,6 +126,8 @@ const Profile = () => {
         console.log(url);
       }
     );
+
+    changeImage();
   };
   useEffect(() => {
     if (url) {
@@ -278,8 +280,8 @@ const Profile = () => {
                   <input value={""} />
                 )}
                 {submitBioAvaiable && (
-                  <DivIcon>
-                    <Backup onClick={() => handleSubmit(userName)} />
+                  <DivIcon onClick={(e) => handleSubmit(userBio)}>
+                    <Backup />
                   </DivIcon>
                 )}
               </ApiText>
@@ -301,7 +303,7 @@ const Profile = () => {
                 </Tooltip>
                 {submitSkillsAvaiable && (
                   <DivIcon>
-                    <Backup onClick={() => handleSubmit(userName)} />
+                    <Backup onClick={(e) => handleSubmit(userHardSkill)} />
                   </DivIcon>
                 )}
               </ApiText>
