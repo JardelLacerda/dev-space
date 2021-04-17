@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from "../../components/Header";
+
 import { LoginContext } from "../../providers/login";
 import { useContext, useEffect, useState } from "react";
+
 import {
   Info,
   EditInfo,
@@ -12,7 +15,13 @@ import {
   Config,
   UserInfo,
   Div,
+  DivIcon,
+  Input,
 } from "./style";
+
+import { Tooltip, Button } from "@material-ui/core";
+import { Backup } from "@material-ui/icons/";
+
 import { ThemeContext } from "../../providers/theme";
 import { ProjectTaks } from "../../providers/project-tasks";
 import { storage } from "../../servers/firebase";
@@ -33,15 +42,23 @@ const Profile = () => {
     profileEdit,
     userInfos,
   } = useContext(ProjectTaks);
+
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState(false);
+  const [submitNameAvaiable, setSubmitNameAvaiable] = useState(false);
+  const [submitBioAvaiable, setSubmitBioAvaiable] = useState(false);
+  const [submitSkillsAvaiable, setSubmitSkillsAvaiable] = useState(false);
+
   const [progress, setProgress] = useState(0);
   const [userName, setUserName] = useState("");
   const [userBio, setUserBio] = useState("");
   const [userHardSkill, setUserHardSkills] = useState("Java");
+
   console.log(storage);
+
   const [load, setLoad] = useState(false);
-  const handleSubmit = (infoChange) => {
+
+  const handleSubmit = (infoChange, e) => {
     let data = {};
     if (userName === infoChange) {
       data.name = infoChange;
@@ -54,6 +71,24 @@ const Profile = () => {
     setLoad(!load);
     console.log(data);
   };
+
+  const handleInput = (e) => {
+    const isName = e.target.id === "name";
+    const isBio = e.target.id === "bio";
+    const isSkills = e.target.id === "skills";
+    const configProfile = e.target.id === "configProfile";
+
+    isName ? setSubmitNameAvaiable(true) : setSubmitNameAvaiable(false);
+    isBio ? setSubmitBioAvaiable(true) : setSubmitBioAvaiable(false);
+    isSkills ? setSubmitSkillsAvaiable(true) : setSubmitSkillsAvaiable(false);
+
+    if (configProfile) {
+      setSubmitNameAvaiable(false);
+      setSubmitBioAvaiable(false);
+      setSubmitSkillsAvaiable(false);
+    }
+  };
+
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
@@ -113,22 +148,28 @@ const Profile = () => {
   useEffect(() => {
     profileInfo(user_id);
   }, [load]);
+
   return (
     <>
       <Header />
+
       <Container theme={theme ? ThemeDark : ThemeLigth}>
         <Info>
           <Config theme={theme ? ThemeDark : ThemeLigth}>
             Informações do Usuário
           </Config>
+
           <UserInfo theme={theme ? ThemeDark : ThemeLigth}>
             {userInfos.image && <img src={userInfos.image} alt="User Img" />}
+
             <div>
               <span>Nome </span>
+
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
                 {userInfos.name}
               </ApiText>
             </div>
+
             <div>
               <span>E-mail </span>
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
@@ -153,58 +194,99 @@ const Profile = () => {
             </div>
           </UserInfo>
         </Info>
+
         <EditInfo>
           <Config theme={theme ? ThemeDark : ThemeLigth}>
             Imagem do Perfil
           </Config>
+
           <ProfileImage theme={theme ? ThemeDark : ThemeLigth}>
             {userInfos.image && <img src={userInfos.image} alt="User Img" />}
             <input type="file" onChange={handleChange} />
             <button onClick={handleUpload}>Upload</button>
           </ProfileImage>
+
           <Config theme={theme ? ThemeDark : ThemeLigth}>
             Configurações do Perfil
           </Config>
-          <PersonalInfo theme={theme ? ThemeDark : ThemeLigth}>
+
+          <PersonalInfo
+            id="configProfile"
+            onClick={(e) => handleInput(e)}
+            theme={theme ? ThemeDark : ThemeLigth}
+          >
             <Div>
               Nome
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
                 {userInfos.name !== undefined ? (
-                  <input
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                  />
+                  <Tooltip
+                    disableFocusListener
+                    disableTouchListener
+                    title="Editar"
+                  >
+                    <Input
+                      id="name"
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                      onClick={(e) => handleInput(e)}
+                    />
+                  </Tooltip>
                 ) : (
                   <input value={""} />
                 )}
-                <button onClick={() => handleSubmit(userName)}>Vai dar</button>
+                {submitNameAvaiable && (
+                  <DivIcon>
+                    <Backup onClick={(e) => handleSubmit(userName)} />
+                  </DivIcon>
+                )}
               </ApiText>
             </Div>
             <Div>
               Bio
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
                 {userInfos.name !== undefined ? (
-                  <input
-                    style={{ height: "50px" }}
-                    value={userBio}
-                    onChange={(e) => setUserBio(e.target.value)}
-                  />
+                  <Tooltip
+                    disableFocusListener
+                    disableTouchListener
+                    title="Editar"
+                  >
+                    <Input
+                      id="bio"
+                      value={userBio}
+                      onChange={(e) => setUserBio(e.target.value)}
+                      onClick={(e) => handleInput(e)}
+                    />
+                  </Tooltip>
                 ) : (
                   <input value={""} />
                 )}
-                <button onClick={() => handleSubmit(userBio)}>Vai dar</button>
+                {submitBioAvaiable && (
+                  <DivIcon>
+                    <Backup onClick={() => handleSubmit(userName)} />
+                  </DivIcon>
+                )}
               </ApiText>
             </Div>
             <Div>
               Hard Skills
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
-                <input
-                  value={userHardSkill}
-                  onChange={(e) => setUserHardSkills(e.target.value)}
-                />
-                <button onClick={() => handleSubmit(userHardSkill)}>
-                  Vai dar
-                </button>
+                <Tooltip
+                  disableFocusListener
+                  disableTouchListener
+                  title="Editar"
+                >
+                  <Input
+                    id="skills"
+                    value={userHardSkill}
+                    onChange={(e) => setUserHardSkills(e.target.value)}
+                    onClick={(e) => handleInput(e)}
+                  />
+                </Tooltip>
+                {submitSkillsAvaiable && (
+                  <DivIcon>
+                    <Backup onClick={() => handleSubmit(userName)} />
+                  </DivIcon>
+                )}
               </ApiText>
             </Div>
           </PersonalInfo>
