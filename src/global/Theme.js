@@ -22,10 +22,15 @@ export const ThemeDarkForm = {
 };
 
 export const ThemeLigth = {
-  PrimaryTheme: "#fff",
-  SecundaryTheme: "#FEFFD0",
-  TextColor: "#000",
-  Details: "#1A1B1D",
+  // PrimaryTheme: "#fff",
+  // SecundaryTheme: "#FEFFD0",
+  // TextColor: "#000",
+  // Details: "#1A1B1D",
+  // SecundaryColor: "#1A1B1D",
+  PrimaryTheme: "#000",
+  SecundaryTheme: "#FFF",
+  TextColor: "#fff",
+  Details: "#FED400",
   SecundaryColor: "#1A1B1D",
 };
 
