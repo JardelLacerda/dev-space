@@ -8,7 +8,13 @@ import {
   ListItemText,
 } from "@material-ui/core";
 
-import { DivStyled, AppBarStyled, ToolbarStyled, DrawerStyled } from "./style";
+import {
+  DivStyled,
+  AppBarStyled,
+  ToolbarStyled,
+  DrawerStyled,
+  Logo,
+} from "./style";
 
 import {
   AccountCircle,
@@ -24,6 +30,9 @@ import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
 import { useHistory, useParams } from "react-router-dom";
 import { LoginContext } from "../../providers/login";
+
+// import LogoDevSpace from "../../images/devSpaceLogo.png";
+import LogoDevSpace from "../../images/logo3.png";
 
 const Header = () => {
   const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
@@ -100,7 +109,7 @@ const Header = () => {
     <DivStyled>
       <AppBarStyled position="static" theme={theme ? ThemeDark : ThemeLigth}>
         <ToolbarStyled theme={theme ? ThemeDark : ThemeLigth}>
-          <div>Logo</div>
+          <Logo src={LogoDevSpace} alt="logo" />
           {["right"].map((anchor) => (
             <div className="tempMobile" key={anchor}>
               <Button color="inherit" onClick={toggleDrawer(anchor, true)}>

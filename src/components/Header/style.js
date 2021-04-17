@@ -41,3 +41,8 @@ export const DrawerStyled = styled(Drawer)`
     background-color: ${({ theme }) => theme.Details};
   }
 `;
+
+export const Logo = styled.img`
+  width: 100px;
+  height: 100px;
+`;
