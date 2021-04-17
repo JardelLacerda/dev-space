@@ -42,9 +42,9 @@ export const UserInfo = styled.div`
 export const EditInfo = styled.div`
   width: 90%;
   flex-basis: 370px;
-  height: 400px;
+  height: 480px;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column;
   justify-content: space-around;
   button {
     display: inline-block;
@@ -55,20 +55,36 @@ export const ProfileImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-flow: row-wrap;
+  flex-flow: column;
+  height: 140px;
 
   width: 98%;
 
   background-color: ${({ theme }) => theme.SecundaryTheme};
   border-radius: 10px;
-  height: 20%;
+  /* height: 20%; */
   img {
-    width: 37px;
+    width: 80px;
     margin-left: 10px;
     margin: 0;
+
+    :hover {
+      cursor: pointer;
+    }
   }
   padding: 2px;
+
+  /* border: 1px solid red; */
 `;
+
+export const DivAvatar = styled.div`
+  /* border: 1px solid red; */
+`;
+
+// export const ImageAvatar = styled.img`
+//   width: 200px;
+//   height: 200px;
+// `;
 
 export const PersonalInfo = styled.div`
   background-color: ${({ theme }) => theme.SecundaryTheme};
@@ -77,7 +93,6 @@ export const PersonalInfo = styled.div`
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
-  /* border: 1px solid red; */
 
   input {
     border: none;

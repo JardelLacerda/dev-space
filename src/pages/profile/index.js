@@ -17,6 +17,8 @@ import {
   Div,
   DivIcon,
   Input,
+  DivAvatar,
+  ImageAvatar,
 } from "./style";
 
 import { Tooltip, Button } from "@material-ui/core";
@@ -48,6 +50,7 @@ const Profile = () => {
   const [submitNameAvaiable, setSubmitNameAvaiable] = useState(false);
   const [submitBioAvaiable, setSubmitBioAvaiable] = useState(false);
   const [submitSkillsAvaiable, setSubmitSkillsAvaiable] = useState(false);
+  const [isChangeImage, setIsChangeImage] = useState(false);
 
   const [progress, setProgress] = useState(0);
   const [userName, setUserName] = useState("");
@@ -93,6 +96,10 @@ const Profile = () => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
+  };
+
+  const changeImage = (e) => {
+    isChangeImage ? setIsChangeImage(false) : setIsChangeImage(true);
   };
 
   const handleUpload = () => {
@@ -201,9 +208,19 @@ const Profile = () => {
           </Config>
 
           <ProfileImage theme={theme ? ThemeDark : ThemeLigth}>
-            {userInfos.image && <img src={userInfos.image} alt="User Img" />}
-            <input type="file" onChange={handleChange} />
-            <button onClick={handleUpload}>Upload</button>
+            {userInfos.image && (
+              <img
+                onClick={(e) => changeImage(e)}
+                src={userInfos.image}
+                alt="User Img"
+              />
+            )}
+            {isChangeImage && (
+              <DivAvatar>
+                <input type="file" onChange={handleChange} />
+                <button onClick={handleUpload}>Upload</button>
+              </DivAvatar>
+            )}
           </ProfileImage>
 
           <Config theme={theme ? ThemeDark : ThemeLigth}>
