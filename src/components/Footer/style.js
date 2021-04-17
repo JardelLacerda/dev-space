@@ -47,4 +47,9 @@ export const SubTitle = styled.h4`
   color: white;
 `;
 
-export const LinkStyled = styled.a``;
+export const LinkStyled = styled.a`
+  color: white;
+  :hover {
+    text-decoration: none;
+  }
+`;
