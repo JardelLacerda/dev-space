@@ -2,6 +2,8 @@ import Form from "../../components/Form";
 import StandardModal from "../../components/Modal";
 import Astronaut from "../../images/astronaut.png";
 
+import { showToast } from "../../components/Toastify";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -28,6 +30,12 @@ const RequisitionRegister = () => {
     resolver: yupResolver(schema),
   });
 
+  const toastify = () =>
+    showToast({ type: "warn", message: "Usuário criado com sucesso" });
+
+  const toastifyError = () =>
+    showToast({ type: "delete", message: "Usuário já existe" });
+
   const onSubmit = (data) => {
     delete data.passwordConfirm;
 
@@ -44,9 +52,13 @@ const RequisitionRegister = () => {
         },
       })
       .then(() => {
+        toastify();
         reset();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toastifyError();
+        console.log(err);
+      });
   };
 
   return (

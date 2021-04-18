@@ -13,6 +13,8 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useHistory } from "react-router";
 
+import { showToast } from "../../components/Toastify";
+
 const RequisitionLogin = () => {
   const { setVaribles } = useContext(LoginContext);
   const history = useHistory();
@@ -31,6 +33,12 @@ const RequisitionLogin = () => {
     resolver: yupResolver(schema),
   });
 
+  const toastify = () =>
+    showToast({ type: "warn", message: "Usuário criado com sucesso" });
+
+  const toastifyError = () =>
+    showToast({ type: "delete", message: "Usuário ou senha incorretos" });
+
   const onSubmit = async (data) => {
     await axios
       .post("https://dev-space-json-server.herokuapp.com/login", data, {
@@ -44,9 +52,13 @@ const RequisitionLogin = () => {
           resp.data.accessToken
         );
         reset();
+        toastify();
         history.push(`/home/${jwt_decode(resp.data.accessToken).sub}`);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toastifyError();
+        // console.log(err);
+      });
   };
 
   return (
