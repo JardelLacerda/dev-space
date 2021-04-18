@@ -7,6 +7,8 @@ export const Container = styled.div`
   min-width: 238px;
   display: flex;
   flex-direction: column;
+  padding: 0 0 10px 0;
+  align-items: center;
   width: calc((100% - 96px) / 6);
 `;
 
