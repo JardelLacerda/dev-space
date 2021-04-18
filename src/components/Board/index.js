@@ -85,14 +85,16 @@ const Board = () => {
   };
 
   usedProject["tasks"] = tasksProject;
-  const loadedProject = async () => {
+
+  const loadedProject = async(id) => {
     await Promise.all([getUsedProject(id), getTasksProject(id)]);
     setLoadProject(false);
-  };
+   };
+  
 
   useEffect(() => {
-    loadedProject();
-  }, []);
+    loadedProject(id);
+  }, [id]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
