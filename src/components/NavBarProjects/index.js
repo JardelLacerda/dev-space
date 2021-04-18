@@ -1,4 +1,4 @@
-import { Container } from "./style";
+import { Container, DivAvatar } from "./style";
 import ListAvatar from "../ListAvatar";
 import { Button } from "@material-ui/core";
 import { useContext } from "react";
@@ -19,7 +19,9 @@ function NavBarProjects({ setOnBoard }) {
           <Button onClick={() => setOnBoard(false)}>Informações</Button>
           <Button>Dashboard</Button>
         </div>
-        <ListAvatar participants={participants} />
+        <DivAvatar>
+          <ListAvatar participants={participants} />
+        </DivAvatar>
       </nav>
     </Container>
   );
