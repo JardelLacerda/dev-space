@@ -17,11 +17,9 @@ import { useHistory } from "react-router-dom";
 
 import { ThemeContext } from "../../providers/theme";
 
-import Astronaut2 from "../../images/astronaut2.jpeg";
 import Moon from "../../images/moon-removebg.png";
 import Earth from "../../images/earth.png";
 
-import CardUsers from "../../components/CardUsers";
 import Footer from "../../components/Footer";
 
 const About = () => {

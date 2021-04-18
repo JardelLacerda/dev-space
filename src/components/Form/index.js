@@ -51,7 +51,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
 
 const Form = ({ instructions }) => {
-  const { theme, ThemeDark, ThemeDarkForm, ThemeLigth } = useContext(
+  const { theme, ThemeDark, ThemeDarkForm } = useContext(
     ThemeContext
   );
 

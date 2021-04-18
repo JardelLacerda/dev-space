@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import {
   Button,
@@ -24,28 +24,22 @@ import {
   GetApp,
 } from "@material-ui/icons";
 
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-
-import { useContext } from "react";
 import { ThemeContext } from "../../providers/theme";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { LoginContext } from "../../providers/login";
-
-// import LogoDevSpace from "../../images/devSpaceLogo.png";
 import LogoDevSpace from "../../images/logo3.png";
 
 const Header = () => {
-  const { theme, toggleTheme, ThemeDark, ThemeLigth } = useContext(
+  const { theme, ThemeDark, ThemeLigth } = useContext(
     ThemeContext
   );
-  const { user_id, token } = useContext(LoginContext);
+  const { user_id, isLogged, liberyToken } = useContext(LoginContext);
 
   const [state, setState] = useState({
     right: false,
   });
 
   const history = useHistory();
-  const { id } = useParams();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -65,37 +59,39 @@ const Header = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button onClick={() => history.push("/profile")}>
+        {isLogged && <ListItem button onClick={() => history.push("/profile")}>
           <ListItemIcon>
             <AccountCircle />
           </ListItemIcon>
 
           <ListItemText primary="Perfil" />
-        </ListItem>
-
-        <ListItem button onClick={() => history.push(`/home/${user_id}`)}>
+        </ListItem>}
+        
+        {isLogged && <ListItem button onClick={() => history.push(`/home/${user_id}`)}>
           <ListItemIcon>
             <Home />
           </ListItemIcon>
 
           <ListItemText primary="Home" />
-        </ListItem>
-
-        <ListItem button onClick={() => history.push("/about")}>
+        </ListItem> }
+        
+        {!isLogged && <ListItem button onClick={() => history.push("/about")}>
           <ListItemIcon>
             <GetApp />
           </ListItemIcon>
 
-          <ListItemText primary="Login" />
-        </ListItem>
+          <ListItemText primary="Login-Register" />
+        </ListItem>}
+        
 
-        <ListItem button onClick={() => Logout()}>
+        {isLogged && <ListItem button onClick={() => Logout()}>
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>
 
           <ListItemText primary="Sair" />
-        </ListItem>
+        </ListItem>}
+        
       </List>
     </div>
   );
@@ -104,6 +100,10 @@ const Header = () => {
     localStorage.clear();
     history.push("/");
   };
+
+  useEffect(() => {
+    liberyToken()
+  }, [])
 
   return (
     <DivStyled>
@@ -126,7 +126,7 @@ const Header = () => {
             </div>
           ))}
           <div className="tempDesktop">
-            {token && (
+            {isLogged && (
               <Button
                 color="inherit"
                 onClick={() => history.push(`/home/${user_id}`)}
@@ -134,15 +134,18 @@ const Header = () => {
                 Home
               </Button>
             )}
-            <Button color="inherit" onClick={() => history.push("/profile")}>
+            {isLogged && <Button color="inherit" onClick={() => history.push("/profile")}>
               Perfil
-            </Button>
-            <Button color="inherit" onClick={() => history.push("/about")}>
-              Login
-            </Button>
-            <Button color="inherit" onClick={() => Logout()}>
+            </Button>}
+
+            {isLogged && <Button color="inherit" onClick={() => Logout()}>
               Sair
-            </Button>
+            </Button>}
+            {!isLogged && <Button color="inherit" onClick={() => history.push("/about")}>
+              Login-Register
+            </Button> }
+            
+           
           </div>
         </ToolbarStyled>
       </AppBarStyled>

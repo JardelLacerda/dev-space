@@ -7,9 +7,11 @@ const LoginProvider = ({ children }) => {
   const [user_id, setId] = useState();
   const [isLogged, setIsLogged] = useState(false);
 
-  const Logged = () => {
-    if (token !== undefined) {
+  const Logged = (token) => {
+    if (token !== null) {
       return setIsLogged(true);
+    }else{
+      setIsLogged(false)
     }
   };
 
@@ -26,7 +28,7 @@ const LoginProvider = ({ children }) => {
     user && setId(user);
     let token = window.localStorage.getItem("token");
     token && setToken(token);
-    Logged();
+    Logged(token);
   };
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const LoginProvider = ({ children }) => {
 
   return (
     <LoginContext.Provider
-      value={{ token, user_id, isLogged, liberyToken, setVaribles }}
+      value={{ token, user_id, isLogged, liberyToken, setVaribles, setIsLogged }}
     >
       {children}
     </LoginContext.Provider>

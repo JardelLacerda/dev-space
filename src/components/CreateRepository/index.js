@@ -3,7 +3,6 @@ import StandardModal from "../Modal";
 import { useContext } from "react";
 import { useParams } from "react-router";
 import { ProjectTaks } from "../../providers/project-tasks";
-import { ThemeContext } from "../../providers/theme";
 import { LoginContext } from "../../providers/login";
 
 import { useForm } from "react-hook-form";
@@ -18,7 +17,6 @@ import { ButtonForm, Form, InputForm } from "./styled";
 const CreateRepository = () => {
   const { id } = useParams();
   const { token } = useContext(LoginContext);
-  const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
   const { usedProject, getUsedProject } = useContext(ProjectTaks);
 
   const schema = yup.object().shape({

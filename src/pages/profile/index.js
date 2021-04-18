@@ -6,24 +6,18 @@ import { useContext, useEffect, useState } from "react";
 
 import {
   Info,
-  EditInfo,
   Container,
-  ProfileImage,
-  PersonalInfo,
-  PersonalInfoEdit,
   ApiText,
   Config,
   UserInfo,
-  Div,
   DivIcon,
   Input,
   DivAvatar,
-  ImageAvatar,
   Item,
   DivHardSkills,
 } from "./style";
 
-import { Tooltip, Button } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import { Backup, Add } from "@material-ui/icons/";
 
 import { ThemeContext } from "../../providers/theme";
@@ -40,15 +34,9 @@ import * as yup from "yup";
 const Profile = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
 
-  const { token, user_id, isLogged } = useContext(LoginContext);
+  const {  user_id } = useContext(LoginContext);
 
   const {
-    usedProject,
-    tasksProject,
-    getTasksProject,
-    getUsedProject,
-    setUsedProject,
-    actulyProject,
     ProfileInfo,
     profileEdit,
     userInfos,

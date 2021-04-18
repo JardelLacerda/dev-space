@@ -1,7 +1,7 @@
 import { Draggable } from "react-beautiful-dnd";
 import Timer from "../Timer";
 import { Container } from "./style";
-import { Chip } from "@material-ui/core";
+//import { Chip } from "@material-ui/core";
 import ListAvatar from "../ListAvatar";
 import DelTask from "../deleteTask";
 
