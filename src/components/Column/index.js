@@ -1,11 +1,9 @@
 import { Droppable } from "react-beautiful-dnd";
-import ButtonAddTask from "../ButtonAddTask";
 import CreateCard from "../CreateCard";
 import Task from "../Task";
 import { Container, Title, TaskList } from "./style";
 
 const Column = ({ column, tasks, test }) => {
-  //console.log(test);
   return (
     <Container key={test}>
       <Title>{column.title}</Title>
@@ -30,9 +28,6 @@ const Column = ({ column, tasks, test }) => {
           );
         }}
       </Droppable>
-      {
-        //<ButtonAddTask />
-      }
 
       <CreateCard idColumn={column.id} />
     </Container>
@@ -40,7 +35,3 @@ const Column = ({ column, tasks, test }) => {
 };
 
 export default Column;
-
-/*{tasks.map((task, index) => (
-                <Task key={task.id} task={task} index={index} />
-              ))} */

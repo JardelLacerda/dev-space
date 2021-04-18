@@ -3,7 +3,6 @@ import StandardModal from "../Modal";
 import { useContext } from "react";
 import { useParams } from "react-router";
 import { ProjectTaks } from "../../providers/project-tasks";
-import { ThemeContext } from "../../providers/theme";
 import { LoginContext } from "../../providers/login";
 
 import { useForm } from "react-hook-form";
@@ -18,8 +17,7 @@ import { ButtonForm, Form, InputForm } from "../CreateRepository/styled";
 const CreateTecnology = () => {
   const { id } = useParams();
   const { token } = useContext(LoginContext);
-  const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
-  const { usedProject, setUsedProject, getUsedProject } = useContext(
+  const { usedProject, getUsedProject } = useContext(
     ProjectTaks
   );
 
