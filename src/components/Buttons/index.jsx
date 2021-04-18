@@ -13,16 +13,13 @@ Quando retirada, as dimensões ficam adequadas às outras páginas
     Exemplo:
       icon={<IconeEscolhido/>}
 */
-import { Avatar } from "@material-ui/core";
-import { StyledButton } from "./style";
+import { StyledButton, AvatarStyled } from "./style";
 
 const Button = ({ nameBtn, icon, onClick = null, isIcon = false }) => {
   return (
     <>
       {isIcon ? (
-        <Avatar style={{ cursor: "pointer" }} onClick={onClick}>
-          {icon}
-        </Avatar>
+        <AvatarStyled onClick={onClick}>{icon}</AvatarStyled>
       ) : (
         <StyledButton onClick={onClick}>{nameBtn}</StyledButton>
       )}

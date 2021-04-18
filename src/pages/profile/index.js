@@ -19,14 +19,22 @@ import {
   Input,
   DivAvatar,
   ImageAvatar,
+  Item,
 } from "./style";
 
 import { Tooltip, Button } from "@material-ui/core";
-import { Backup } from "@material-ui/icons/";
+import { Backup, Add } from "@material-ui/icons/";
 
 import { ThemeContext } from "../../providers/theme";
 import { ProjectTaks } from "../../providers/project-tasks";
 import { storage } from "../../servers/firebase";
+
+import StandardModal from "../../components/Modal";
+import Form from "../../components/Form";
+import Astronaut from "../../images/astronaut.png";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const Profile = () => {
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
@@ -61,7 +69,7 @@ const Profile = () => {
 
   const [load, setLoad] = useState(false);
 
-  const handleSubmit = (infoChange, e) => {
+  const onSubmit = (infoChange, e) => {
     let data = {};
     if (userName === infoChange) {
       data.name = infoChange;
@@ -74,6 +82,28 @@ const Profile = () => {
     setLoad(!load);
     console.log(data);
   };
+
+  const changeHardSkills = (data) => {
+    console.log(data.hard_skills);
+    data["hard_skills"] = [...userInfos.hard_skills, data.hard_skills];
+
+    profileEdit(user_id, data);
+    reset();
+    console.log("HARD SKILLS", data);
+  };
+
+  const schema = yup.object().shape({
+    hard_skills: yup.string().required("Campo Obrigatorio"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const handleInput = (e) => {
     const isName = e.target.id === "name";
@@ -129,18 +159,22 @@ const Profile = () => {
 
     changeImage();
   };
+
   useEffect(() => {
     if (url) {
       let data = {};
+
       data.image = url;
+
       profileEdit(user_id, data);
+
       setInterval(function () {
         setLoad(!load);
       }, 2000);
     }
   }, [url]);
+
   useEffect(() => {
-    console.log("Ola");
     if (user_id !== undefined) {
       profileInfo(user_id);
       console.log(userInfos);
@@ -163,53 +197,13 @@ const Profile = () => {
       <Header />
 
       <Container theme={theme ? ThemeDark : ThemeLigth}>
-        <Info>
+        <Info id="configProfile" onClick={(e) => handleInput(e)}>
           <Config theme={theme ? ThemeDark : ThemeLigth}>
             Informações do Usuário
           </Config>
 
           <UserInfo theme={theme ? ThemeDark : ThemeLigth}>
-            {userInfos.image && <img src={userInfos.image} alt="User Img" />}
-
-            <div>
-              <span>Nome </span>
-
-              <ApiText theme={theme ? ThemeLigth : ThemeDark}>
-                {userInfos.name}
-              </ApiText>
-            </div>
-
-            <div>
-              <span>E-mail </span>
-              <ApiText theme={theme ? ThemeLigth : ThemeDark}>
-                {userInfos.email}
-              </ApiText>
-            </div>
-            <div>
-              <span>Bio </span>
-              <ApiText theme={theme ? ThemeLigth : ThemeDark}>
-                {userInfos.bio}
-              </ApiText>
-            </div>
-            <div>
-              <span>Hard Skills</span>
-              {userInfos?.hard_skills?.map((value, index) => (
-                <span key={index}>
-                  <ApiText theme={theme ? ThemeLigth : ThemeDark}>
-                    {value}
-                  </ApiText>
-                </span>
-              ))}
-            </div>
-          </UserInfo>
-        </Info>
-
-        <EditInfo>
-          <Config theme={theme ? ThemeDark : ThemeLigth}>
-            Imagem do Perfil
-          </Config>
-
-          <ProfileImage theme={theme ? ThemeDark : ThemeLigth}>
+            {/* {userInfos.image && <img src={userInfos.image} alt="User Img" />} */}
             {userInfos.image && (
               <img
                 onClick={(e) => changeImage(e)}
@@ -223,20 +217,13 @@ const Profile = () => {
                 <button onClick={handleUpload}>Upload</button>
               </DivAvatar>
             )}
-          </ProfileImage>
 
-          <Config theme={theme ? ThemeDark : ThemeLigth}>
-            Configurações do Perfil
-          </Config>
+            <div>
+              <span>Nome </span>
 
-          <PersonalInfo
-            id="configProfile"
-            onClick={(e) => handleInput(e)}
-            theme={theme ? ThemeDark : ThemeLigth}
-          >
-            <Div>
-              Nome
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
+                {false && userInfos.name}
+
                 {userInfos.name !== undefined ? (
                   <Tooltip
                     disableFocusListener
@@ -255,14 +242,23 @@ const Profile = () => {
                 )}
                 {submitNameAvaiable && (
                   <DivIcon>
-                    <Backup onClick={(e) => handleSubmit(userName)} />
+                    <Backup onClick={(e) => onSubmit(userName)} />
                   </DivIcon>
                 )}
               </ApiText>
-            </Div>
-            <Div>
-              Bio
+            </div>
+
+            <div>
+              <span>E-mail </span>
               <ApiText theme={theme ? ThemeLigth : ThemeDark}>
+                {userInfos.email}
+              </ApiText>
+            </div>
+            <div>
+              <span>Bio </span>
+              <ApiText theme={theme ? ThemeLigth : ThemeDark}>
+                {false && userInfos.bio}
+
                 {userInfos.name !== undefined ? (
                   <Tooltip
                     disableFocusListener
@@ -280,36 +276,40 @@ const Profile = () => {
                   <input value={""} />
                 )}
                 {submitBioAvaiable && (
-                  <DivIcon onClick={(e) => handleSubmit(userBio)}>
+                  <DivIcon onClick={(e) => onSubmit(userBio)}>
                     <Backup />
                   </DivIcon>
                 )}
               </ApiText>
-            </Div>
-            <Div>
-              Hard Skills
-              <ApiText theme={theme ? ThemeLigth : ThemeDark}>
-                <Tooltip
-                  disableFocusListener
-                  disableTouchListener
-                  title="Editar"
-                >
-                  <Input
-                    id="skills"
-                    value={userHardSkill}
-                    onChange={(e) => setUserHardSkills(e.target.value)}
-                    onClick={(e) => handleInput(e)}
-                  />
-                </Tooltip>
-                {submitSkillsAvaiable && (
-                  <DivIcon>
-                    <Backup onClick={(e) => handleSubmit(userHardSkill)} />
-                  </DivIcon>
-                )}
-              </ApiText>
-            </Div>
-          </PersonalInfo>
-        </EditInfo>
+            </div>
+            <div>
+              <Item>
+                <span>Hard Skills</span>{" "}
+                <DivIcon>
+                  <StandardModal isIcon icon={<Add />}>
+                    <Form
+                      instructions={{
+                        buttonName: "Adicionar",
+                        icone: { icone: Astronaut, width: "150px" },
+                        inputList: [["hard_skills", "Digite uma hard skill"]],
+                        formAction: handleSubmit(changeHardSkills),
+                        register: register,
+                        errors: errors,
+                      }}
+                    />
+                  </StandardModal>
+                </DivIcon>
+              </Item>
+              {userInfos?.hard_skills?.map((value, index) => (
+                <span key={index}>
+                  <ApiText theme={theme ? ThemeLigth : ThemeDark}>
+                    {value}
+                  </ApiText>
+                </span>
+              ))}
+            </div>
+          </UserInfo>
+        </Info>
       </Container>
     </>
   );

@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import Button from "@material-ui/core/Button";
+import { Avatar, Button } from "@material-ui/core";
+
 import Colors from "../../global/Theme";
 
 export const StyledButton = styled(Button)`
@@ -34,5 +35,16 @@ export const StyledButton = styled(Button)`
   }
   & .MuiTouchRipple-root {
     border: 2px solid ${Colors.BasicYellow};
+  }
+`;
+
+export const AvatarStyled = styled(Avatar)`
+  cursor: pointer;
+  && {
+    width: 22px;
+    height: 22px;
+  }
+  :hover {
+    background-color: ${Colors.BasicGrayBlack};
   }
 `;
