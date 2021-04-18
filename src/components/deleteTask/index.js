@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { LoginContext } from "../../providers/login";
 import { ProjectTaks } from "../../providers/project-tasks";
 import { useParams } from "react-router-dom";
+import { HighlightOffStyled } from "./style";
 
 const DelTask = ({ taskId, column }) => {
   const { token } = useContext(LoginContext);
@@ -46,7 +47,7 @@ const DelTask = ({ taskId, column }) => {
       })
       .catch((err) => console.log(err));
   };
-  return <button onClick={() => handleClick()}>x</button>;
+  return <HighlightOffStyled onClick={() => handleClick()} />;
 };
 
 export default DelTask;

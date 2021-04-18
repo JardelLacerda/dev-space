@@ -12,6 +12,7 @@ import { ProjectTaks } from "../../providers/project-tasks";
 import { useParams } from "react-router";
 import { LoginContext } from "../../providers/login";
 import axios from "axios";
+import { showToast } from "../../components/Toastify";
 
 const CreateCard = ({ idColumn }) => {
   const { id } = useParams();
@@ -64,6 +65,9 @@ const CreateCard = ({ idColumn }) => {
       .catch((err) => console.log(err));
   };
 
+  const toastify = () =>
+    showToast({ type: "warn", message: "Task criada com sucesso" });
+
   const createTask = async (taskId) => {
     await axios
       .get(`https://dev-space-json-server.herokuapp.com/project/${id}`, {
@@ -91,6 +95,7 @@ const CreateCard = ({ idColumn }) => {
           .then((resp) => {
             getTasksProject(id);
             getUsedProject(id);
+            toastify();
           })
           .catch((error) => {
             console.log(error);
