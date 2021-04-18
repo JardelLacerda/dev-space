@@ -129,7 +129,7 @@ const Header = () => {
             {token && (
               <Button
                 color="inherit"
-                onClick={() => history.push(`/home/${id}`)}
+                onClick={() => history.push(`/home/${user_id}`)}
               >
                 Home
               </Button>
