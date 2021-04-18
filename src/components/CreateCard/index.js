@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import StandardModal from "../Modal";
 import DateTimePicker from "react-datetime-picker";
 import { useState, useContext } from "react";
-import { Modal } from "./styled";
+import { Modal, FormStyled, Input, Button } from "./styled";
 
 import { ProjectTaks } from "../../providers/project-tasks";
 import { useParams } from "react-router";
@@ -99,21 +99,21 @@ const CreateCard = ({ idColumn }) => {
   return (
     <StandardModal buttonTxtOpen="+">
       <Modal>
-        <form onSubmit={handleSubmit(handleMyForm)}>
+        <FormStyled onSubmit={handleSubmit(handleMyForm)}>
           <div>
-            <input placeholder="Titulo" input {...register("title")} />
+            <Input placeholder="Titulo" input {...register("title")} />
             {errors.title?.message}
           </div>
           <label>Data de Conclusão</label>
           <div>
             <DateTimePicker onChange={setValue} value={value} />
           </div>
-          <input placeholder="Descrição" input {...register("description")} />
+          <Input placeholder="Descrição" input {...register("description")} />
           {errors.description?.message}
           <div>
-            <button>Create</button>
+            <Button>Create</Button>
           </div>
-        </form>
+        </FormStyled>
       </Modal>
     </StandardModal>
   );
