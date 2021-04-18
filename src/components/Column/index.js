@@ -18,7 +18,12 @@ const Column = ({ column, tasks, test }) => {
               isDraggingOver={snapshot.isDraggingOver}
             >
               {tasks.map((task, index) => (
-                <Task test={task.id} task={task} index={index} />
+                <Task
+                  test={task.id}
+                  task={task}
+                  index={index}
+                  column={column}
+                />
               ))}
               {provided.placeholder}
             </TaskList>
