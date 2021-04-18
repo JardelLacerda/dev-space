@@ -20,6 +20,8 @@ import {
   Title,
   TitleTwo,
   Container,
+  Element,
+  CardProjects,
 } from "./styled";
 
 import { useContext, useEffect } from "react";
@@ -61,13 +63,14 @@ const HomePage = () => {
           <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
             {myProjects?.map((pj, index) => {
               return (
-                <p
+                <CardProjects
                   key={index}
                   onClick={() => history.push(`/project/${pj.id}`)}
                   style={{ cursor: "pointer" }}
                 >
-                  {pj.title} {pj.id}
-                </p>
+                  {pj.title}
+                  {/* {pj.id} */}
+                </CardProjects>
               );
             })}
 
@@ -79,27 +82,6 @@ const HomePage = () => {
                   style={{ cursor: "pointer" }}
                 >
                   {pj.title} {pj.id}
-                </p>
-              );
-            })}
-          </LocationProjects>
-        </Division>
-
-        <Division>
-          <LocationTitle>
-            <TitleTwo theme={theme ? ThemeDark : ThemeLigth}>
-              Minhas Tarefas
-            </TitleTwo>
-          </LocationTitle>
-          <LocationProjects theme={theme ? ThemeDark : ThemeLigth}>
-            {myTasks?.map((task, index) => {
-              return (
-                <p
-                  key={index}
-                  onClick={() => history.push(`/project/${task.project_id}`)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {task.title} {task.id}
                 </p>
               );
             })}
