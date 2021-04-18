@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Rocket from "../../images/rocket.png";
+import { Card } from "@material-ui/core";
 
 export const Container = styled.section`
   width: 100vw;
@@ -62,9 +63,17 @@ export const LocationProjects = styled.div`
   width: 100%;
   min-height: 300px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-flow: row wrap;
+  justify-content: space-around;
   align-items: center;
 
   color: ${({ theme }) => theme.SecundaryColor};
+`;
+
+export const CardProjects = styled(Card)`
+  && {
+    background-color: #f7cc31;
+  }
+  text-transform: uppercase;
+  padding: 1em;
 `;
