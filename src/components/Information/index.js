@@ -25,7 +25,11 @@ import CreateIcon from "@material-ui/icons/Create";
 import IconGitlab from "../../images/icons/gitLab.png";
 import IconGitHub from "../../images/icons/gitHub.png";
 import IconFigma from "../../images/icons/figma.png";
+
+// import jsIcon from "../../images/icons/jsIcon.png";
+
 import axios from "axios";
+
 import CreateTecnology from "../CreateTecnology";
 import CreateRepository from "../CreateRepository";
 import CreateDescriptionTech from "../CreateDescriptionTech";
@@ -51,20 +55,9 @@ const Information = () => {
   console.log(usedProject.description, "Descrição PROJETO");
 
   const ColorRandon = () => {
-    const CorlorsCard = [
-      "#191308",
-      "#454B66",
-      "#9CA3DB",
-      "#9883E5",
-      "#50C9CE",
-      "#FCD3DE",
-      "#2176FF",
-      "#F79824",
-      "#3D0814",
-      "#006C67",
-    ];
+    const CorlorsCard = ["#e9c46a", "#f4a261", "#e76f51", "#2a9d8f", "#264653"];
 
-    return CorlorsCard[Math.floor(Math.random() * 10)];
+    return CorlorsCard[Math.floor(Math.random() * 5)];
   };
 
   const DeleteTecnology = async (tec) => {
@@ -152,8 +145,8 @@ const Information = () => {
               <span>{`{`}</span>Tecnologias<span>{`}`}</span>
             </h2>
             <ContentCard>
-              {technology.map((tec, index) => {
-                return (
+              {technology.map((tec, index) => (
+                <>
                   <MiniCardTec key={index} coloration={ColorRandon()}>
                     <h4>{tec.title}</h4>
                     {delTec && (
@@ -164,8 +157,8 @@ const Information = () => {
                       </RemoveItem>
                     )}
                   </MiniCardTec>
-                );
-              })}
+                </>
+              ))}
             </ContentCard>
             <ButtonsCard>
               <CreateTecnology />
