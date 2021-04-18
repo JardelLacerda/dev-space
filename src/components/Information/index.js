@@ -28,6 +28,7 @@ import IconFigma from "../../images/icons/figma.png";
 import axios from "axios";
 import CreateTecnology from "../CreateTecnology";
 import CreateRepository from "../CreateRepository";
+import CreateDescriptionTech from "../CreateDescriptionTech";
 
 const Information = () => {
   const { id } = useParams();
@@ -46,6 +47,8 @@ const Information = () => {
     title,
     accumulated_time,
   } = usedProject;
+
+  console.log(usedProject.description, "Descrição PROJETO");
 
   const ColorRandon = () => {
     const CorlorsCard = [
@@ -107,7 +110,6 @@ const Information = () => {
         }
       )
       .then((resp) => {
-        console.log(resp);
         getUsedProject(id);
       })
       .catch((err) => console.log(err));
@@ -141,7 +143,7 @@ const Information = () => {
               <p>{description}</p>
             </ContentCard>
             <ButtonsCard>
-              <CreateIcon style={{ cursor: "pointer" }} />
+              <CreateDescriptionTech />
             </ButtonsCard>
           </CardPadrao>
 
@@ -197,7 +199,7 @@ const Information = () => {
                         />
                       </RemoveItem>
                     )}
-                    {rep.title === "Gitlab" ? (
+                    {rep.title === "GitLab" ? (
                       <IconLink src={IconGitlab} />
                     ) : rep.title === "GitHub" ? (
                       <IconLink src={IconGitHub} />

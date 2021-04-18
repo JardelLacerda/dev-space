@@ -41,8 +41,8 @@ export const StyledButton = styled(Button)`
 export const AvatarStyled = styled(Avatar)`
   cursor: pointer;
   && {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
   }
   :hover {
     background-color: ${Colors.BasicGrayBlack};

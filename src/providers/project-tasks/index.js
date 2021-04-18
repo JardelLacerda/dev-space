@@ -38,6 +38,7 @@ const ProjectTasksProvider = ({ children }) => {
         }
       )
       .then((resp) => {
+        console.log("MY PROJECTS", resp.data);
         setMyProjects(resp.data);
       });
   };
@@ -68,7 +69,7 @@ const ProjectTasksProvider = ({ children }) => {
         },
       })
       .then((resp) => {
-        console.log(resp.data);
+        console.log(resp.data, "GET TASKS");
         setMyTasks(
           resp.data.filter((task) => {
             if (task.participants.includes(Number(idUser))) {
