@@ -1,5 +1,6 @@
 import { toast, ToastContainer, Zoom, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 //Exemplo de uso:
 // 1: Importar o toastify import { showToast } from "../../toastify";
@@ -19,6 +20,9 @@ export const showToast = ({ type, message }) => {
       break;
     case "send":
       toast.info(message);
+      break;
+    case "warn":
+      toast.warn(message);
       break;
     default:
       toast.info(message);
