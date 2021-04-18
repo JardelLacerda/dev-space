@@ -99,7 +99,7 @@ const ProjectTasksProvider = ({ children }) => {
       });
   };
 
-  const profileInfo = async (idUser) => {
+  const ProfileInfo = async (idUser) => {
     await axios
       .get(`https://dev-space-json-server.herokuapp.com/users/${idUser}`, {
         headers: {
@@ -124,6 +124,8 @@ const ProjectTasksProvider = ({ children }) => {
         }
       )
       .then((resp) => {
+        ProfileInfo(idUser);
+
         console.log(resp);
       });
   };
@@ -159,7 +161,7 @@ const ProjectTasksProvider = ({ children }) => {
         getProjectParticipant,
         getTasksProject,
         getTasks,
-        profileInfo,
+        ProfileInfo,
         profileEdit,
       }}
     >

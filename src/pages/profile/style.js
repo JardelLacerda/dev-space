@@ -22,15 +22,15 @@ export const Container = styled.div`
 export const Info = styled.div`
   flex-basis: 370px;
   height: 500px;
-  /* min-height: 100vh; */
-  border: 1px solid red;
-  margin-top: 20px;
+  min-height: 100vh;
+  /* border: 1px solid red; */
+  /* margin-top: 20px; */
 
   img {
     width: 140px;
 
     @media (min-width: 700px) {
-      width: 180px;
+      width: 160px;
     }
 
     :hover {
@@ -146,6 +146,17 @@ export const DivIcon = styled.div`
   :hover {
     cursor: pointer;
   }
+`;
+
+export const DivHardSkills = styled.div`
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  height: 210px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 `;
 
 export const Input = styled.input`

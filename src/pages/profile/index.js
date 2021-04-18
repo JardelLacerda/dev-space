@@ -20,6 +20,7 @@ import {
   DivAvatar,
   ImageAvatar,
   Item,
+  DivHardSkills,
 } from "./style";
 
 import { Tooltip, Button } from "@material-ui/core";
@@ -48,7 +49,7 @@ const Profile = () => {
     getUsedProject,
     setUsedProject,
     actulyProject,
-    profileInfo,
+    ProfileInfo,
     profileEdit,
     userInfos,
   } = useContext(ProjectTaks);
@@ -89,6 +90,7 @@ const Profile = () => {
 
     profileEdit(user_id, data);
     reset();
+
     console.log("HARD SKILLS", data);
   };
 
@@ -176,7 +178,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (user_id !== undefined) {
-      profileInfo(user_id);
+      ProfileInfo(user_id);
       console.log(userInfos);
 
       setUserBio(userInfos.bio);
@@ -189,7 +191,7 @@ const Profile = () => {
   }, [userInfos.name]);
 
   useEffect(() => {
-    profileInfo(user_id);
+    ProfileInfo(user_id);
   }, [load]);
 
   return (
@@ -300,13 +302,15 @@ const Profile = () => {
                   </StandardModal>
                 </DivIcon>
               </Item>
-              {userInfos?.hard_skills?.map((value, index) => (
-                <span key={index}>
-                  <ApiText theme={theme ? ThemeLigth : ThemeDark}>
-                    {value}
-                  </ApiText>
-                </span>
-              ))}
+              <DivHardSkills>
+                {userInfos?.hard_skills?.map((value, index) => (
+                  <span key={index}>
+                    <ApiText theme={theme ? ThemeLigth : ThemeDark}>
+                      {value}
+                    </ApiText>
+                  </span>
+                ))}
+              </DivHardSkills>
             </div>
           </UserInfo>
         </Info>
