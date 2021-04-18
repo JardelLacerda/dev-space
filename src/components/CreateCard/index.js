@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import StandardModal from "../Modal";
+import { Add } from "@material-ui/icons/";
+
 import DateTimePicker from "react-datetime-picker";
 import { useState, useContext } from "react";
 import { Modal, FormStyled, Input, Button } from "./styled";
@@ -97,7 +99,7 @@ const CreateCard = ({ idColumn }) => {
   };
 
   return (
-    <StandardModal buttonTxtOpen="+">
+    <StandardModal isIcon icon={<Add />}>
       <Modal>
         <FormStyled onSubmit={handleSubmit(handleMyForm)}>
           <div>
