@@ -2,7 +2,7 @@ import Styled from "styled-components";
 import Colors from "../../global/Theme";
 
 export const ContainerForm = Styled.form`
-    background-color: ${({ theme }) => theme.PrimaryTheme};
+    background-color: ${({ theme }) => theme.PrimaryThemeForm};
     width: 90%;
     max-width: 300px;
     border: solid 1px ${({ theme }) => theme.Details};
