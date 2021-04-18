@@ -5,8 +5,7 @@ import { Chip } from "@material-ui/core";
 import ListAvatar from "../ListAvatar";
 import DelTask from "../deleteTask";
 
-const Task = ({ task, index }) => {
-  console.log(task.id);
+const Task = ({ task, index, column }) => {
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => {
@@ -18,13 +17,14 @@ const Task = ({ task, index }) => {
             isDragging={snapshot.isDragging}
           >
             <div className="header_task">
-              <DelTask taskId={task.id} />
+              <DelTask taskId={task.id} column={column} />
               <ListAvatar participants={task.participants} />
 
               <Timer
                 play_timer={task.timer.play}
                 initial_time={task.timer.initial_time}
                 count_time={task.timer.count_time}
+                task={task}
               />
             </div>
 

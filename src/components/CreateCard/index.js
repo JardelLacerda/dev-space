@@ -13,7 +13,12 @@ import axios from "axios";
 
 const CreateCard = ({ idColumn }) => {
   const { id } = useParams();
-  const { setTasksProject, tasksProject } = useContext(ProjectTaks);
+  const {
+    setTasksProject,
+    tasksProject,
+    getTasksProject,
+    getUsedProject,
+  } = useContext(ProjectTaks);
   const { token } = useContext(LoginContext);
 
   const [value, setValue] = useState(new Date());
@@ -82,7 +87,11 @@ const CreateCard = ({ idColumn }) => {
             }
           )
           .then((resp) => {
-            console.log(resp);
+            getTasksProject(id);
+            getUsedProject(id);
+          })
+          .catch((error) => {
+            console.log(error);
           });
       });
   };
