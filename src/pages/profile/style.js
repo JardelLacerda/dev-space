@@ -21,10 +21,6 @@ export const Container = styled.div`
 
 export const Info = styled.div`
   flex-basis: 370px;
-  height: 500px;
-  min-height: 100vh;
-  /* border: 1px solid red; */
-  /* margin-top: 20px; */
 
   img {
     width: 140px;
@@ -46,6 +42,7 @@ export const Info = styled.div`
 export const UserInfo = styled.div`
   background-color: ${({ theme }) => theme.SecundaryTheme};
   border-radius: 10px;
+
   padding: 5%;
   display: flex;
   flex-flow: column;
@@ -152,7 +149,6 @@ export const DivHardSkills = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
-  height: 210px;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
