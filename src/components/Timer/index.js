@@ -3,14 +3,12 @@ import { useState, useEffect, useContext } from "react";
 import ButtonPlayPause from "../ButtonPlayPause";
 import { Container } from "./style";
 import { LoginContext } from "../../providers/login";
-import { ProjectTaks } from "../../providers/project-tasks";
-import { FlightTakeoffSharp } from "@material-ui/icons";
 
 const Timer = ({ play_timer, initial_time, count_time, task }) => {
-  const [play, setPlay] = useState(play_timer);
-  const [initialTime, setInitialTime] = useState(initial_time);
-  const [countTime, setCountTime] = useState(count_time);
-  const [timer, setTimer] = useState(count_time);
+  const [play, setPlay] = useState(false);
+  const [initialTime, setInitialTime] = useState("");
+  const [countTime, setCountTime] = useState(0);
+  const [timer, setTimer] = useState(0);
 
   const { token } = useContext(LoginContext);
 
@@ -39,7 +37,6 @@ const Timer = ({ play_timer, initial_time, count_time, task }) => {
 
   const setPauseTime = (diff) => {
     let data = task;
-
     data.timer.initial_time = "";
     data.timer.play = false;
     data.timer.count_time = data.timer.count_time + diff;
@@ -65,7 +62,6 @@ const Timer = ({ play_timer, initial_time, count_time, task }) => {
   console.log(task);
 
   useEffect(() => {
-    setTimer(task.timer.count);
     if (play) {
       playTimer();
     }
@@ -85,17 +81,16 @@ const Timer = ({ play_timer, initial_time, count_time, task }) => {
   const handlePause = () => {
     setPlay(false);
     const finishTime = new Date();
-    const diff = Math.abs(
-      finishTime.getTime() - task.timer.initial_time.getTime()
-    );
-    setPauseTime(diff);
+    const diff = Math.abs(finishTime.getTime() - initialTime.getTime());
+    setCountTime(diff);
+    setTimer(diff);
     pauseTimer();
+    setPauseTime(diff);
   };
 
   let intervalTimer;
 
   const playTimer = () => {
-    setTimer(task.timer.count_time);
     intervalTimer = setInterval(() => {
       setTimer((timer) => timer + 1000);
     }, 1000);
