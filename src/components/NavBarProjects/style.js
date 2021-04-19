@@ -2,24 +2,22 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: auto;
-  /* background-color: #444; */
-  background: rgb(94, 94, 94);
-  background: radial-gradient(
-    circle,
-    rgba(94, 94, 94, 1) 0%,
-    rgba(0, 0, 6, 1) 100%,
-    rgba(0, 0, 6, 1) 100%
-  );
-  /* height: 70px; */
+  background-color: #444;
+  height: 70px;
+
   margin: 0 auto;
+  padding: 10px 0 10px 0;
   border-bottom: 2px solid #f7d917;
 
+  @media (min-width: 700px) {
+    height: 40px;
+  }
   nav {
     /* max-width: 1920px; */
     width: auto;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
     height: 100%;
@@ -37,7 +35,7 @@ export const Container = styled.div`
     margin: 0 16px;
 
     @media (min-width: 700px) {
-      font-size: 17px;
+      font-size: 15px;
     }
   }
 
