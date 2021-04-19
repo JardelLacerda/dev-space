@@ -9,19 +9,19 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import AddIcon from "@material-ui/icons/Add";
-
 import axios from "axios";
-import { ButtonForm, Form, InputForm } from "../CreateRepository/styled";
 
-const CreateTecnology = () => {
+import EditIcon from "@material-ui/icons/Edit";
+
+import { ButtonForm, Form, InputForm } from "./styled";
+
+const CreateDescriptionTech = () => {
   const { id } = useParams();
   const { token } = useContext(LoginContext);
   const { usedProject, getUsedProject } = useContext(ProjectTaks);
 
   const schema = yup.object().shape({
-    title: yup.string().required("Campo Obrigatorio"),
-    link: yup.string(),
+    description: yup.string().required("Campo Obrigatorio"),
   });
 
   const {
@@ -33,9 +33,8 @@ const CreateTecnology = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (tec) => {
-    let data = { technology: [...usedProject.technology, tec] };
-    console.log(data, "DADOS TEC");
+  const onSubmit = async (rep) => {
+    let data = { description: rep.description };
 
     await axios
       .patch(
@@ -49,22 +48,21 @@ const CreateTecnology = () => {
       )
       .then((resp) => {
         reset();
+
         getUsedProject(id);
       })
       .catch((err) => console.log(err));
   };
 
   return (
-    <StandardModal isIcon={true} icon={<AddIcon />}>
+    <StandardModal isIcon={true} icon={<EditIcon />}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <InputForm name="title" {...register("title")} placeholder="Titulo" />
-        {errors && errors["title"]?.message}
         <InputForm
-          name="link"
-          {...register("link")}
-          placeholder="Link (Opcional)"
+          name="description"
+          {...register("description")}
+          placeholder="Descrição"
         />
-        {errors && errors["link"]?.message}
+        {errors && errors["description"]?.message}
 
         <ButtonForm>Criar</ButtonForm>
       </Form>
@@ -72,4 +70,4 @@ const CreateTecnology = () => {
   );
 };
 
-export default CreateTecnology;
+export default CreateDescriptionTech;

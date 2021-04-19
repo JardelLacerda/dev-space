@@ -22,46 +22,42 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import CreateIcon from "@material-ui/icons/Create";
 
+import reactIcon from "../../images/icons/reactIcon.png";
+import rubyIcon from "../../images/icons/rubyIcon.png";
+import IconJS from "../../images/icons/javascriptIcon.png";
 import IconGitlab from "../../images/icons/gitLab.png";
 import IconGitHub from "../../images/icons/gitHub.png";
 import IconFigma from "../../images/icons/figma.png";
+
+// import jsIcon from "../../images/icons/jsIcon.png";
+import PythonIcon from "../../images/icons/python.png";
+
 import axios from "axios";
+
 import CreateTecnology from "../CreateTecnology";
 import CreateRepository from "../CreateRepository";
+import CreateDescriptionTech from "../CreateDescriptionTech";
 
 const Information = () => {
   const { id } = useParams();
   const [loadedInfos, setLoadedInfos] = useState(true);
   const [delTec, setDelTec] = useState(false);
   const [delRep, setDelRep] = useState(false);
+  const [time, setTime] = useState(0);
+
   const { token } = useContext(LoginContext);
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
 
-  const { getUsedProject, usedProject } = useContext(ProjectTaks);
+  const { getUsedProject, usedProject, tasksProject } = useContext(ProjectTaks);
 
-  const {
-    description,
-    repository,
-    technology,
-    title,
-    accumulated_time,
-  } = usedProject;
+  const { description, repository, technology, title } = usedProject;
+
+  // console.log(usedProject.description, "Descrição PROJETO");
 
   const ColorRandon = () => {
-    const CorlorsCard = [
-      "#191308",
-      "#454B66",
-      "#9CA3DB",
-      "#9883E5",
-      "#50C9CE",
-      "#FCD3DE",
-      "#2176FF",
-      "#F79824",
-      "#3D0814",
-      "#006C67",
-    ];
+    const CorlorsCard = ["#e9c46a", "#f4a261", "#e76f51", "#2a9d8f", "#264653"];
 
-    return CorlorsCard[Math.floor(Math.random() * 10)];
+    return CorlorsCard[Math.floor(Math.random() * 5)];
   };
 
   const DeleteTecnology = async (tec) => {
@@ -107,7 +103,6 @@ const Information = () => {
         }
       )
       .then((resp) => {
-        console.log(resp);
         getUsedProject(id);
       })
       .catch((err) => console.log(err));
@@ -120,7 +115,13 @@ const Information = () => {
 
   useEffect(() => {
     loadedProject();
-  }, []);
+
+    setTime(
+      tasksProject.reduce((acumulador, item, indice, array) => {
+        return acumulador + item.timer.count_time;
+      }, 0)
+    );
+  }, [time]);
 
   return loadedInfos ? (
     <p>Carregando suas informaçoes</p>
@@ -129,7 +130,18 @@ const Information = () => {
       <MainContainer>
         <Title theme={theme ? ThemeDark : ThemeLigth}>{title}</Title>
         <SubTitle theme={theme ? ThemeDark : ThemeLigth}>
-          Tempo total do projeto: {accumulated_time}
+          Tempo total do projeto:{" "}
+          {parseInt((time / (1000 * 60 * 60)) % 60) < 10
+            ? `0${parseInt((time / (1000 * 60 * 60)) % 60)}`
+            : parseInt((time / (1000 * 60 * 60)) % 60)}{" "}
+          :{" "}
+          {parseInt((time / (1000 * 60)) % 60) < 10
+            ? `0${parseInt((time / (1000 * 60)) % 60)}`
+            : parseInt((time / (1000 * 60)) % 60)}{" "}
+          :{" "}
+          {parseInt((time / 1000) % 60) < 10
+            ? `0${parseInt((time / 1000) % 60)} `
+            : parseInt((time / 1000) % 60)}
         </SubTitle>
 
         <LocationCardsInfo>
@@ -141,7 +153,7 @@ const Information = () => {
               <p>{description}</p>
             </ContentCard>
             <ButtonsCard>
-              <CreateIcon style={{ cursor: "pointer" }} />
+              <CreateDescriptionTech />
             </ButtonsCard>
           </CardPadrao>
 
@@ -150,10 +162,10 @@ const Information = () => {
               <span>{`{`}</span>Tecnologias<span>{`}`}</span>
             </h2>
             <ContentCard>
-              {technology.map((tec, index) => {
-                return (
-                  <MiniCardTec key={index} coloration={ColorRandon()}>
-                    <h4>{tec.title}</h4>
+              {technology.map((tec, index) => (
+                <>
+                  {/* <h4>{tec.title}</h4> */}
+                  <a className="Icons" key={index}>
                     {delTec && (
                       <RemoveItem>
                         <HighlightOffIcon
@@ -161,9 +173,20 @@ const Information = () => {
                         />
                       </RemoveItem>
                     )}
-                  </MiniCardTec>
-                );
-              })}
+                    {tec.title === "Javascript" ? (
+                      <IconLink src={IconJS} />
+                    ) : tec.title === "Python" ? (
+                      <IconLink src={PythonIcon} />
+                    ) : tec.title === "Ruby" ? (
+                      <IconLink src={rubyIcon} />
+                    ) : tec.title === "React" ? (
+                      <IconLink src={reactIcon} />
+                    ) : (
+                      <p>{tec.title}</p>
+                    )}
+                  </a>
+                </>
+              ))}
             </ContentCard>
             <ButtonsCard>
               <CreateTecnology />
@@ -197,7 +220,7 @@ const Information = () => {
                         />
                       </RemoveItem>
                     )}
-                    {rep.title === "Gitlab" ? (
+                    {rep.title === "GitLab" ? (
                       <IconLink src={IconGitlab} />
                     ) : rep.title === "GitHub" ? (
                       <IconLink src={IconGitHub} />

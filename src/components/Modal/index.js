@@ -48,10 +48,7 @@ const StandardModal = ({ buttonTxtOpen, children, icon, isIcon }) => {
         }}
       >
         <Fade in={open}>
-          <Paper>
-            {children}
-            {/* <Button nameBtn="Close" onClick={handleClose} /> */}
-          </Paper>
+          <Paper>{children}</Paper>
         </Fade>
       </Modal>
     </div>

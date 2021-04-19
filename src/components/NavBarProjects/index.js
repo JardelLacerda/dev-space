@@ -1,5 +1,5 @@
 import { Container, DivAvatar } from "./style";
-import ListAvatar from "../ListAvatar";
+// import ListAvatar from "../ListAvatar";
 import { Button } from "@material-ui/core";
 import { useContext } from "react";
 import { ProjectTaks } from "../../providers/project-tasks";
@@ -7,7 +7,7 @@ import { ProjectTaks } from "../../providers/project-tasks";
 function NavBarProjects({ setOnBoard }) {
   const { usedProject } = useContext(ProjectTaks);
   const { title } = usedProject;
-  let participants = ["User1", "User1", "User1", "User1"];
+  // let participants = ["User1", "User1", "User1", "User1"];
 
   return (
     <Container>
@@ -17,11 +17,11 @@ function NavBarProjects({ setOnBoard }) {
         <div className="menu">
           <Button onClick={() => setOnBoard(true)}>Projeto</Button>
           <Button onClick={() => setOnBoard(false)}>Informações</Button>
-          <Button>Dashboard</Button>
+          {/* <Button>Dashboard</Button> */}
         </div>
-        <DivAvatar>
+        {/* <DivAvatar>
           <ListAvatar participants={participants} />
-        </DivAvatar>
+        </DivAvatar> */}
       </nav>
     </Container>
   );
