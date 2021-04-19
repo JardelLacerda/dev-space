@@ -22,6 +22,9 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import CreateIcon from "@material-ui/icons/Create";
 
+import reactIcon from "../../images/icons/reactIcon.png";
+import rubyIcon from "../../images/icons/rubyIcon.png";
+import IconJS from "../../images/icons/javascriptIcon.png";
 import IconGitlab from "../../images/icons/gitLab.png";
 import IconGitHub from "../../images/icons/gitHub.png";
 import IconFigma from "../../images/icons/figma.png";
@@ -161,24 +164,27 @@ const Information = () => {
             <ContentCard>
               {technology.map((tec, index) => (
                 <>
-                  {console.log(tec)}
                   {/* <h4>{tec.title}</h4> */}
                   <a className="Icons" key={index}>
+                    {delTec && (
+                      <RemoveItem>
+                        <HighlightOffIcon
+                          onClick={() => DeleteTecnology(tec)}
+                        />
+                      </RemoveItem>
+                    )}
                     {tec.title === "Javascript" ? (
-                      <IconLink src={IconGitlab} />
+                      <IconLink src={IconJS} />
                     ) : tec.title === "Python" ? (
                       <IconLink src={PythonIcon} />
                     ) : tec.title === "Ruby" ? (
-                      <IconLink src={IconFigma} />
+                      <IconLink src={rubyIcon} />
+                    ) : tec.title === "React" ? (
+                      <IconLink src={reactIcon} />
                     ) : (
                       <p>{tec.title}</p>
                     )}
                   </a>
-                  {delTec && (
-                    <RemoveItem>
-                      <HighlightOffIcon onClick={() => DeleteTecnology(tec)} />
-                    </RemoveItem>
-                  )}
                 </>
               ))}
             </ContentCard>
