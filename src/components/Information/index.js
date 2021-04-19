@@ -27,6 +27,7 @@ import IconGitHub from "../../images/icons/gitHub.png";
 import IconFigma from "../../images/icons/figma.png";
 
 // import jsIcon from "../../images/icons/jsIcon.png";
+import PythonIcon from "../../images/icons/python.png";
 
 import axios from "axios";
 
@@ -39,20 +40,16 @@ const Information = () => {
   const [loadedInfos, setLoadedInfos] = useState(true);
   const [delTec, setDelTec] = useState(false);
   const [delRep, setDelRep] = useState(false);
+  const [time, setTime] = useState(0);
+
   const { token } = useContext(LoginContext);
   const { theme, ThemeDark, ThemeLigth } = useContext(ThemeContext);
 
-  const { getUsedProject, usedProject } = useContext(ProjectTaks);
+  const { getUsedProject, usedProject, tasksProject } = useContext(ProjectTaks);
 
-  const {
-    description,
-    repository,
-    technology,
-    title,
-    accumulated_time,
-  } = usedProject;
+  const { description, repository, technology, title } = usedProject;
 
-  console.log(usedProject.description, "Descrição PROJETO");
+  // console.log(usedProject.description, "Descrição PROJETO");
 
   const ColorRandon = () => {
     const CorlorsCard = ["#e9c46a", "#f4a261", "#e76f51", "#2a9d8f", "#264653"];
@@ -115,7 +112,13 @@ const Information = () => {
 
   useEffect(() => {
     loadedProject();
-  }, []);
+
+    setTime(
+      tasksProject.reduce((acumulador, item, indice, array) => {
+        return acumulador + item.timer.count_time;
+      }, 0)
+    );
+  }, [time]);
 
   return loadedInfos ? (
     <p>Carregando suas informaçoes</p>
@@ -124,7 +127,18 @@ const Information = () => {
       <MainContainer>
         <Title theme={theme ? ThemeDark : ThemeLigth}>{title}</Title>
         <SubTitle theme={theme ? ThemeDark : ThemeLigth}>
-          Tempo total do projeto: {accumulated_time}
+          Tempo total do projeto:{" "}
+          {parseInt((time / (1000 * 60 * 60)) % 60) < 10
+            ? `0${parseInt((time / (1000 * 60 * 60)) % 60)}`
+            : parseInt((time / (1000 * 60 * 60)) % 60)}{" "}
+          :{" "}
+          {parseInt((time / (1000 * 60)) % 60) < 10
+            ? `0${parseInt((time / (1000 * 60)) % 60)}`
+            : parseInt((time / (1000 * 60)) % 60)}{" "}
+          :{" "}
+          {parseInt((time / 1000) % 60) < 10
+            ? `0${parseInt((time / 1000) % 60)} `
+            : parseInt((time / 1000) % 60)}
         </SubTitle>
 
         <LocationCardsInfo>
@@ -147,16 +161,24 @@ const Information = () => {
             <ContentCard>
               {technology.map((tec, index) => (
                 <>
-                  <MiniCardTec key={index} coloration={ColorRandon()}>
-                    <h4>{tec.title}</h4>
-                    {delTec && (
-                      <RemoveItem>
-                        <HighlightOffIcon
-                          onClick={() => DeleteTecnology(tec)}
-                        />
-                      </RemoveItem>
+                  {console.log(tec)}
+                  {/* <h4>{tec.title}</h4> */}
+                  <a className="Icons" key={index}>
+                    {tec.title === "Javascript" ? (
+                      <IconLink src={IconGitlab} />
+                    ) : tec.title === "Python" ? (
+                      <IconLink src={PythonIcon} />
+                    ) : tec.title === "Ruby" ? (
+                      <IconLink src={IconFigma} />
+                    ) : (
+                      <p>{tec.title}</p>
                     )}
-                  </MiniCardTec>
+                  </a>
+                  {delTec && (
+                    <RemoveItem>
+                      <HighlightOffIcon onClick={() => DeleteTecnology(tec)} />
+                    </RemoveItem>
+                  )}
                 </>
               ))}
             </ContentCard>
