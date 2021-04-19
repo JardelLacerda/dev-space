@@ -128,7 +128,7 @@ const Information = () => {
   ) : (
     <Container theme={theme ? ThemeDark : ThemeLigth}>
       <MainContainer>
-        <Title theme={theme ? ThemeDark : ThemeLigth}>{title}</Title>
+        {/* <Title theme={theme ? ThemeDark : ThemeLigth}>{title}</Title> */}
         <SubTitle theme={theme ? ThemeDark : ThemeLigth}>
           Tempo total do projeto:{" "}
           {parseInt((time / (1000 * 60 * 60)) % 60) < 10
